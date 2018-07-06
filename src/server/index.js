@@ -49,6 +49,7 @@ app.use(express.static(path.join(__dirname, 'views')))
 
 app.use('/haha', haha);
 app.get('/name', function (req, res) {
+  
   res.sendFile('./views/index.html')
 })
 
