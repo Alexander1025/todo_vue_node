@@ -15,6 +15,8 @@ import webpackHotMiddleware from 'webpack-hot-middleware'
 
 import config from '../../build/webpack.dev.conf'
 
+import haha from './router/test.js'
+
 const app = express()
 
 // 引入history模式让浏览器进行前端路由页面跳转
@@ -36,6 +38,16 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.use(webpackHotMiddleware(compiler))
 app.use(express.static(path.join(__dirname, 'views')))
+
+
+
+
+
+
+
+
+
+app.use('/haha', haha);
 app.get('/name', function (req, res) {
   res.sendFile('./views/index.html')
 })
@@ -48,6 +60,16 @@ app.post('/login', function (req, res) {
   data.query = data.url.query;
   res.send(data);
 });
+
+
+
+
+
+
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

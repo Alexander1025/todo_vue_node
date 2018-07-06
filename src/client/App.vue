@@ -1,7 +1,7 @@
 <template>
   <div class="app full-height">
     <h1>{{ message }}</h1>
-    <router-link :to="{ name: 'hello' }">Goto Hello</router-link>
+    <router-link :to="{ name: 'hello' }">dfdsafew</router-link>
     <router-view></router-view>
   </div>
 </template>
@@ -10,7 +10,7 @@
 export default {
   data () {
     return {
-      message: 'mytodo'
+      message: 'asdf'
     }
   }
 }
