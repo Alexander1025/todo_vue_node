@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "babel-runtime": "^6.23.0",
+    "mysql": "^2.15.0",
     "vue": "^2.5.13",
     "vue-hot-reload-api": "^2.1.0",
     "vue-html-loader": "^1.2.4",

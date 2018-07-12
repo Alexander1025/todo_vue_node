@@ -17,6 +17,8 @@ import config from '../../build/webpack.dev.conf'
 
 import haha from './router/test.js'
 
+import mysql from 'mysql'
+
 const app = express()
 
 // 引入history模式让浏览器进行前端路由页面跳转
@@ -54,13 +56,34 @@ app.get('/name', function (req, res) {
 })
 
 app.post('/login', function (req, res) {
-  var data = {};
-  data.data = req.path;
-  data.originalUrl = req.originalUrl;
-  data.url = url.parse(req.url, true);
-  data.query = data.url.query;
-  res.send(data);
+  
+ 
+  var connection = mysql.createConnection({     
+    host     : '192.168.0.222',       
+    user     : 'jeansadmin',              
+    password : 'gaeolvep9rxl',       
+    port: '3306',                   
+    database: 'one', 
+  }); 
+  connection.connect();
+  var  sql = 'SELECT * FROM ob_user';
+  connection.query(sql,function (err, result) {
+    if(err){
+      console.log('[SELECT ERROR] - ',err.message);
+      return;
+    }
+
+   res.send(result);
 });
+connection.end();
+  // var data = {};
+  // data.data = req.path;
+  // data.originalUrl = req.originzalUrl;
+  // data.url = url.parse(req.url, true);
+  // data.query = data.url.query;
+  
+});
+
 
 
 
