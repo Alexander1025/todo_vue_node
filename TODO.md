@@ -1,157 +1,98 @@
-工作计划
-====
+Vue + Express 前后端脚手架
+=========================================
 
-### 架构
-- [x] 前端热启动
-- [x] 后端热启动
-- [x] 启动服务器
-- [ ] 链接数据库
-- [x] 前端路由
-- [x] 后端路由
+在原版本基础之上，修改了webpack的相关配置文件。使得项目可以运行build命令，编译vue相关代码。
+前端部分增加了vue全家桶（vue-router，vuex）
+后端express部分增加有history模式，支持前端路由。需要传统后端路由方式的话，请注释掉`server/index.js`中`app.use(history())`
+重新修改了文件夹结构
 
-### 功能
-- [ ] 任务清单
-- - [ ] 单次任务清单
-- - [ ] 长期任务清单
-- - [ ] 反长期任务清单
-- [ ] 任务管理
-- - [ ] 新增任务
-- - [ ] 管理任务
-- - [ ] 删除任务
-- [ ] 功能界面
-- - [ ] 显示
-- - - [ ] 任务页
-- - - [ ] 日历视图页
-- - - [ ] 新增任务页
-- - - [ ] 登陆(注册)页
-- [ ] 通用头部
-- [ ] 通用底部(从左边开始)
+#### 1.10 版本
+- 去掉了相关UI组件的配置，如果需要进行配置的话可以参考官方资料
+  - [iView](https://www.iviewui.com/)
+  - [element-UI](http://element-cn.eleme.io/#/zh-CN)
+- 删除了不需要的package
 
-### 表设计
-- [ ] user  用户表
-- [ ] task  任务表
+fork源：[southerncross/vue-express-dev-boilerplate](https://github.com/southerncross/vue-express-dev-boilerplate)
+
+## 关键词
+
+- Vue (vue-router + vuex)
+- Express
+- Nodemon
+- Webpack
+- Npm
 
 
+## 文件目录
 
-工作技术盏
-====
-- [x] vue
-- [ ] vue-router
-- [ ] vue-vuex
-- [ ] node
-- [ ] express
-- [ ] webpack
+```
+.
+├── LICENSE
+├── README.md
+├── nodemon.json
+├── package.json
+├── src
+│   ├── client
+│   │   ├── App.vue
+│   │   ├── components
+│   │   │   └── Hello.vue
+│   │   │── static
+│   │   │── router
+│   │   │── store
+│   │   │── views
+│   │   └── index.js
+│   └── server
+│       ├── index.js
+│       ├── config
+│       ├── dao
+│       ├── model
+│       ├── router
+│       ├── public
+│       │   └── favicon.ico
+│       └── views
+│             └── index.html
+├── build
+│   ├── build.js
+│   ├── clicheck-version.js
+│   ├── dev-client.js
+│   ├── utils.js
+│   ├── vue-loader.conf.js
+│   ├── webpack.base.conf.js
+│   ├── webpack.dev.conf.js
+│   └── webpack.prod.conf.js
+├── config
+     ├── dev.env.js
+     ├── index.js
+     └── prod.env.js
+```
 
+## 用法
 
+1. 安装依赖包
 
+   `npm install`
 
-工作日志
-====
+2. 运行开发环境
 
-- 简述:
-    - 多功能备忘录任务清单
-- 主要功能:
-    - 任务清单:
-        1. 单次任务清单(备忘录):
-            - 只做一次的事务清单，做完即改变状态，到期到点提醒(可设为不提醒)
-        2. 长期任务清单:
-            - 某段时期的重复的任务清单，做完即改变此周期任务状态，每个周期重置一次状态
-        3. 反长期任务清单:
-            - 某段时期内不能做的任务清单，做完即改变此周期任务状态，每个周期重置一次状态
-    - 任务管理:
-        1. 新增任务
-            - 选择任务重要程度(及对应的自定义颜色)
-            - 选择任务期限
-            - 选择任务周期(长期任务可选)
-        2. 管理任务
-            - 修改任务重要程度(及对应的自定义颜色)
-            - 修改任务期限
-            - 修改任务周期(长期任务可选)
-        3. 删除任务
-    - 功能界面
-        1. 显示
-            - 任务页(首页)
-                - 上部有默认为一周的短时间视图，拉下为整月时间视图
-                - 今天的任务清单
-                    - 点击任务行前的选择框可改变此任务的状态
-                    - 左滑可编辑(编辑跳到“新增任务页”)、删除
-            - 日历视图页
-                - 有月历表，上面有每天任务的缩略圆圈颜色，如已过去的时间，做完的任务的缩略圆圈有变化(暂时定为圆圈颜色透明度变为50%)
-                - 点击日期，跳到此日期的任务页
-            - 新增任务页
-                - 任务名称
-                - 任务等级(暂定有5等级)
-                - 任务种类(自定义)
-                - 任务颜色(自定义,颜色板)
-                - 任务种类(长期与备忘)
-                    - 长期 -- 选择周期、任务延续时间
-                    - 备忘 -- 选择到点提示时间
-            - 登陆(注册)页
-            <br>
-            <br>
-            <br>
-            <br>
-            - 通用头部
-                - 左上 -- 设置
-                - 中上 -- 显示当前时期，间距
-            - 通用底部(从左边开始)
-                - 一 -- 专注今日任务切换按钮
-                - 二 -- 专注日期切换按钮
-                - 三 -- 新增任务按钮
-    - 表设计
-        - user
-            - userid
-                - userid
-            - username
-                - 用户名
-            - password
-                - 密码
-            - phone
-                - 手机号
-            - email
-                - email
-            - profession
-                - 职业
-            - age
-                - 年龄
-            - sex
-                - 性别
-            - 
-        - task
-            - taskid
-                - taskid
-            - userid
-                - userid
-            - taskname
-                - 任务名称
-            - tasktype
-                - 任务种类
-            - taskgrade
-                - 任务等级
-            - taskcolor
-                - 任务颜色
-            - taskfrom
-                - 任务开始时间
-            - taskto
-                - 任务结束时间
-            - taskperiod
-                - 任务周期
-            - taskreminddate
-                - 任务提醒 (时刻)
-            - taskremindweek
-                - 任务提醒 (星期)
-            - taskremindday
-                - 任务提醒 (日)
-            - taskremindmonth
-                - 任务提醒 (月)
-            - taskremindyear
-                - 任务提醒 (年)
-            
+   `npm run dev 或者 npm start` 
 
+3. build前端代码
 
+    `npm run build`
+    
+    生成后的代码会在根目录的dist目录下。
+    此时可专门写一个生产环境启动express的脚本。
 
+## 参考资料
 
+Some ideas are stolen from them, really appreciated.
 
-
-
+- [Eslint guide](http://eslint.org/docs/user-guide/getting-started)
+- [Express generator](http://expressjs.com/en/starter/generator.html)
+- [Vue template](https://github.com/vuejs-templates/webpack)
+- [Nodemon doc](https://github.com/remy/nodemon#nodemon)
+- [Babel register](http://www.ruanyifeng.com/blog/2016/01/babel.html)
+- [webpack-dev-middleware-boilerplate](https://github.com/madole/webpack-dev-middleware-boilerplate/tree/master/src)
+- [how-can-i-use-webpack-with-express](http://stackoverflow.com/questions/31102035/how-can-i-use-webpack-with-express)
+- [The-ultimate-webpack-setup](http://www.christianalfoni.com/articles/2015_04_19_The-ultimate-webpack-setup)
 
