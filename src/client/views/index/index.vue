@@ -1,16 +1,22 @@
 <template>
-    <div class="app full-height">
-        <router-view></router-view>
+    <div class="indexwrap">
+        <headerCommon></headerCommon>
+        <h1>{{ message }}</h1>
     </div>
 </template>
 
 <script>
+import headerCommon from './../../components/Header.vue';
+
 export default {
     data () {
         return {
-
+            message: 'asd'
         }
     },
+    components:{
+        headerCommon
+    }
 }
 </script>
 
