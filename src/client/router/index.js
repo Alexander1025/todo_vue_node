@@ -10,10 +10,10 @@ import Hello from './../components/Hello'
 Vue.use(Router)
 
 var router = new Router({
-  mode: 'history',
-  routes: [
-    { name: 'hello', path: '/hello', component: Hello }
-  ]
+    mode: 'history',
+    routes: [
+        // { name: 'hello', path: '/hello', component: Hello }
+    ]
 })
 
 export default router
