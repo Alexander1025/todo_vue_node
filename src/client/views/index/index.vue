@@ -11,7 +11,7 @@ import headerCommon from './../../components/Header.vue';
 export default {
     data () {
         return {
-            message: 'asd'
+            message: ''
         }
     },
     components:{

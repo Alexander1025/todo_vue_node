@@ -1,6 +1,6 @@
 <template>
-    <div class="header-common">
-        asd
+    <div class="header_common">
+        &nbsp;
     </div>
 </template>
 <script>
@@ -13,6 +13,13 @@ export default {
 }
 </script>
 <style>
-
+    .header_common{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #617FDF;
+        color: white;
+    }
 </style>
 
