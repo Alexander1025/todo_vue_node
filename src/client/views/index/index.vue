@@ -1,12 +1,13 @@
 <template>
     <div class="indexwrap">
         <headerCommon></headerCommon>
-        <h1>{{ message }}</h1>
+        <calendar></calendar>
     </div>
 </template>
 
 <script>
 import headerCommon from './../../components/Header.vue';
+import calendar from './../../components/calendar.vue';
 
 export default {
     data () {
@@ -15,20 +16,12 @@ export default {
         }
     },
     components:{
-        headerCommon
+        headerCommon,
+        calendar
     }
 }
 </script>
 
 <style>
-html {
-    height: 100%;
-}
 
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
 </style>

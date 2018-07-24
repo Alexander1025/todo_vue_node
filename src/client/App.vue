@@ -20,9 +20,10 @@ html {
 }
 
 body {
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
     height: 100%;
+    margin: 0;
 }
 </style>
