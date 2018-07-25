@@ -1,7 +1,7 @@
 1. 安装依赖包
    `npm install`
 2. 运行开发环境
-   `npm run dev 或者 npm start` 
+   `npm run dev 或者 npm start`
 3. build前端代码
     `npm run build`
 
@@ -32,7 +32,7 @@
 - - - [ ] 日历视图页
 - - - [ ] 新增任务页
 - - - [ ] 登陆(注册)页
-- [ ] 通用头部
+- [x] 通用头部
 - [ ] 通用底部(从左边开始)
 
 ### 表设计
@@ -124,12 +124,21 @@
                 - 年龄
             - sex
                 - 性别
-            - 
+            -
+
+
+
         - task
             - taskid
                 - taskid
             - userid
                 - userid
+
+
+            - status
+                - 任务状态
+
+
             - taskname
                 - 任务名称
             - tasktype
@@ -138,6 +147,8 @@
                 - 任务等级
             - taskcolor
                 - 任务颜色
+
+
             - taskfrom
                 - 任务开始时间
             - taskto
@@ -154,7 +165,7 @@
                 - 任务提醒 (月)
             - taskremindyear
                 - 任务提醒 (年)
-            
+
 
 
 
