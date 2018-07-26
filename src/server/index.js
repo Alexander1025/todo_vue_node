@@ -51,37 +51,34 @@ app.use(express.static(path.join(__dirname, 'views')))
 
 app.use('/haha', haha);
 app.get('/name', function (req, res) {
-  
+
   res.sendFile('./views/index.html')
 })
 
 app.post('/login', function (req, res) {
-  
- 
-  var connection = mysql.createConnection({     
-    host     : '192.168.0.222',       
-    user     : 'jeansadmin',              
-    password : 'gaeolvep9rxl',       
-    port: '3306',                   
-    database: 'one', 
-  }); 
-  connection.connect();
-  var  sql = 'SELECT * FROM ob_user';
-  connection.query(sql,function (err, result) {
-    if(err){
-      console.log('[SELECT ERROR] - ',err.message);
-      return;
-    }
+    var connection = mysql.createConnection({
+        host     : 'localhost',
+        user     : 'root',
+        password : 'root',
+        port: '3306',
+        database: 'mytodo',
+    });
+    connection.connect();
+    var sql = 'SELECT * FROM user';
+    connection.query(sql,function (err, result) {
+            if(err){
+                console.log('[SELECT ERROR] - ',err.message);
+                return;
+            }
+        res.send(result);
+    });
+    connection.end();
+    // var data = {};
+    // data.data = req.path;
+    // data.originalUrl = req.originzalUrl;
+    // data.url = url.parse(req.url, true);
+    // data.query = data.url.query;
 
-   res.send(result);
-});
-connection.end();
-  // var data = {};
-  // data.data = req.path;
-  // data.originalUrl = req.originzalUrl;
-  // data.url = url.parse(req.url, true);
-  // data.query = data.url.query;
-  
 });
 
 
