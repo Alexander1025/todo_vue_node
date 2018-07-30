@@ -10,89 +10,8 @@
             <li class="orange">六</li>
         </ul>
         <div class="calendarmain acrossflex">
-            <div>
-                <div class="calendarlist">01</div>
-            </div>
-            <div>
-                <div class="calendarlist">02</div>
-            </div>
-            <div>
-                <div class="calendarlist">03</div>
-            </div>
-            <div>
-                <div class="calendarlist">04</div>
-            </div>
-            <div>
-                <div class="calendarthis calendarlist">05</div>
-            </div>
-            <div>
-                <div class="calendarlist">06</div>
-            </div>
-            <div>
-                <div class="calendarlist">07</div>
-            </div>
-            <div>
-                <div class="calendarlist">08</div>
-            </div>
-            <div>
-                <div class="calendarlist">09</div>
-            </div>
-            <div>
-                <div class="calendarlist">10</div>
-            </div>
-            <div>
-                <div class="calendarlist">11</div>
-            </div>
-            <div>
-                <div class="calendarlist">12</div>
-            </div>
-            <div>
-                <div class="calendarlist">13</div>
-            </div>
-            <div>
-                <div class="calendarlist">14</div>
-            </div>
-            <div>
-                <div class="calendarlist">15</div>
-            </div>
-            <div>
-                <div class="calendarlist">16</div>
-            </div>
-            <div>
-                <div class="calendarlist">17</div>
-            </div>
-            <div>
-                <div class="calendarlist">18</div>
-            </div>
-            <div>
-                <div class="calendarlist">19</div>
-            </div>
-            <div>
-                <div class="calendarlist">20</div>
-            </div>
-            <div>
-                <div class="calendarlist">21</div>
-            </div>
-            <div>
-                <div class="calendarlist">22</div>
-            </div>
-            <div>
-                <div class="calendarlist">23</div>
-            </div>
-            <div>
-                <div class="calendarlist">24</div>
-            </div>
-            <div>
-                <div class="calendarlist">25</div>
-            </div>
-            <div>
-                <div class="calendarlist">26</div>
-            </div>
-            <div>
-                <div class="calendarlist">27</div>
-            </div>
-            <div>
-                <div class="calendarlist">28</div>
+            <div v-for="(item, index) in datelist">
+                <div class="calendarlist" :class="[item.istoday ? 'calendarthisday' : '', item.isthismonth ? '' : 'calendarthismonth']">{{item.date}}</div>
             </div>
         </div>
     </div>
@@ -101,44 +20,65 @@
 export default {
     data () {
         return {
+            onedaytime:86400000,
             datelist:[
-                {
-                    id:1,
+                // {
+                //     id:1,
 
-                    // 日期
-                    month:7,
-                    date:24,
-                    day:2,
+                //     // 日期
+                //     month:7,
+                //     date:24,
+                //     day:2,
 
-                    // 是否当天
-                    istoday: false,
+                //     // 是否当天
+                //     istoday: false,
+                //     // 是否当月
+                //     isthismonth: false,
 
-                    // 任务信息
-                    havetask: false,
+                //     // 任务信息
+                //     havetask: false,
 
-                    // 节日
-                    holiday:"",
-                    // 节气
-                    solarterm:"",
-                }
+                //     // 节日
+                //     holiday:"",
+                //     // 节气
+                //     solarterm:"",
+                // },
             ],
+            idnowlog:0,
         }
     },
     methods:{
 
     },
     mounted:function(){
+
+
+
+
+
+        // console.log("=======");
+        // console.log("现在");
+
+
+        // 现在
         var date = new Date();
-        console.log(date);
-        console.log(date.getFullYear());
-        console.log(date.getMonth()+1);
-        console.log(date.getDate());
-        console.log(date.getDay());
 
 
-        console.log("=======");
-        console.log("=======");
+        // console.log(date);
+        // console.log(date.getFullYear());
+        // console.log(date.getMonth()+1);
+        // console.log(date.getDate());
+        // console.log(date.getDay());
 
+
+
+
+
+        // console.log("=======");
+        // console.log("本月1号");
+
+
+        // 本月1号
         var date2 = new Date();
         // console.log(date2.setDate(1));
         // console.log(date2.setTime(date2.getTime()-86400000));
@@ -146,29 +86,110 @@ export default {
         date2.setDate(1);
 
 
-        console.log(date2);
-        console.log(date2.getFullYear());
-        console.log(date2.getMonth()+1);
-        console.log(date2.getDate());
-        console.log(date2.getDay());
+        // console.log(date2);
+        // console.log(date2.getFullYear());
+        // console.log(date2.getMonth()+1);
+        // console.log(date2.getDate());
+        // console.log(date2.getDay());
 
 
+
+
+        // console.log("=======");
+        // console.log("上月最后一天");
+
+
+        // 上月最后一天
+
+        var date3 = new Date();
+        date3.setDate(1);
+        date3.setTime(date3.getTime()-(this.onedaytime*1));
+
+
+        // console.log(date3);
+        // console.log(date3.getFullYear());
+        // console.log(date3.getMonth()+1);
+        // console.log(date3.getDate());
+        // console.log(date3.getDay());
+
+
+
+
+        // console.log("=======");
+        // console.log("补上上月天数");
+
+        // 补上上月天数
+        var date4 = new Date();
+        date4.setDate(1);
+        date4.setTime(date4.getTime()-(this.onedaytime*1));
+        // 上月最后一天的日期数
+        var lastday = date4.getDate();
+
+
+        // console.log(lastday);
+        // console.log(lastday.getFullYear());
+        // console.log(lastday.getMonth()+1);
+        // console.log(lastday.getDate());
+        // console.log(lastday.getDay());
+
+        // 如果不是星期六就补上上个月的日数
+        if(date4.getDay() !== 0){
+        // if(date4.getDay() !== 6){
+            for(let i = 0 ; i <= date4.getDay() ; i++){
+                var date5 = new Date();
+
+                // 设置日期天数，本月最后一天日期数 - 本月最后一天星期数 = 显示在日历中第一个上月的日期数
+                date5.setDate(lastday - date4.getDay() + i);
+
+
+                // console.log(i+1);
+                // console.log(date5);
+                // console.log(date5.getFullYear());
+                // console.log(date5.getMonth()+1);
+                // console.log(date5.getDate());
+                // console.log(date5.getDay());
+
+
+                this.idnowlog = i+1;
+                var calendardetail = {
+                    id: i+1,
+                    month: date5.getMonth()+1,
+                    date: date5.getDate(),
+                    day: date5.getDay(),
+                    istoday: false,
+                    isthismonth: false,
+                    havetask: false,
+                    holiday:"",
+                    solarterm:"",
+                };
+
+                this.datelist.push(calendardetail);
+            }
+        }
 
 
         console.log("=======");
-        console.log("=======");
+        console.log("本月天数");
+
+        // 现在
+        var date6 = new Date();
+        date6.setDate(1);
+        if(date6.getMonth()+1 >= 12){
+            date6.setMonth(0);
+        }else{
+            // 增加一个月
+            date6.setMonth(date6.getMonth()+1);
+        }
 
 
 
 
 
-
-        date2.setTime(date2.getTime()-86400000);
-        console.log(date2);
-        console.log(date2.getFullYear());
-        console.log(date2.getMonth()+1);
-        console.log(date2.getDate());
-        console.log(date2.getDay());
+        console.log(date6);
+        console.log(date6.getFullYear());
+        console.log(date6.getMonth()+1);
+        console.log(date6.getDate());
+        console.log(date6.getDay());
 
     }
 }
@@ -226,9 +247,12 @@ export default {
         border-radius: 50%;
 
     }
-    .calendarthis{
+    .calendarthisday{
         background-color: #617FDF;
         color: white;
+    }
+    .calendarthismonth{
+        color: #bdbdbd;
     }
 </style>
 
