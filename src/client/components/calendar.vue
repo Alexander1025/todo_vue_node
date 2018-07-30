@@ -118,7 +118,7 @@ export default {
         // console.log("=======");
         // console.log("补上上月天数");
 
-        // 补上上月天数
+        // 补上上月日期天数
         var date4 = new Date();
         date4.setDate(1);
         date4.setTime(date4.getTime()-(this.onedaytime*1));
@@ -168,8 +168,8 @@ export default {
         }
 
 
-        console.log("=======");
-        console.log("本月天数");
+        // console.log("=======");
+        // console.log("本月天数");
 
         // 现在
         var date6 = new Date();
@@ -180,17 +180,71 @@ export default {
             // 增加一个月
             date6.setMonth(date6.getMonth()+1);
         }
+        date6.setTime(date6.getTime()-(this.onedaytime*1));
+
+
+        // console.log(date6);
+        // console.log(date6.getFullYear());
+        // console.log(date6.getMonth()+1);
+        // console.log(date6.getDate());
+        // console.log(date6.getDay());
+
+        // 生成本月天数
+        var now = new Date();
+        for(let i = 0 ; i <= date6.getDate()-1 ; i++){
+            // console.log(i);
+            // this.idnowlog = i+1;
+            var date7 = new Date();
+            date7.setDate(i+1);
+            this.idnowlog = this.idnowlog+i+1;
+            var calendardetail = {
+                id: this.idnowlog,
+                month: date7.getMonth()+1,
+                date: date7.getDate(),
+                day: date7.getDay(),
+                istoday: false,
+                isthismonth: true,
+                havetask: false,
+                holiday:"",
+                solarterm:"",
+            };
+            if(now.getDate() == date7.getDate()){
+                calendardetail['istoday'] = true;
+            }
+            this.datelist.push(calendardetail);
+        }
 
 
 
 
 
-        console.log(date6);
-        console.log(date6.getFullYear());
-        console.log(date6.getMonth()+1);
-        console.log(date6.getDate());
-        console.log(date6.getDay());
+        // 补上下月日期天数
+        date6.setTime(date6.getTime()+(this.onedaytime*1));
 
+        // console.log(date6);
+        // console.log(date6.getFullYear());
+        // console.log(date6.getMonth()+1);
+        // console.log(date6.getDate());
+        // console.log(date6.getDay());
+
+        for(let i = 0 ; i <= (7 - date6.getDay())-1 ; i++){
+            var date7 = new Date();
+            date7.setDate(i+1);
+            this.idnowlog = this.idnowlog+i+1;
+            var calendardetail = {
+                id: this.idnowlog,
+                month: date7.getMonth()+1,
+                date: date7.getDate(),
+                day: date7.getDay(),
+                istoday: false,
+                isthismonth: false,
+                havetask: false,
+                holiday:"",
+                solarterm:"",
+            };
+
+            this.datelist.push(calendardetail);
+        }
     }
 }
 </script>
