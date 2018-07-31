@@ -1,15 +1,11 @@
 <template>
-    <div class="centerwrap">
-        <img class="img" src="./../../static/images/common/login.png" alt="">
-        <input class="logininput" type="text" placeholder="账号">
-        <input class="logininput" type="password" placeholder="密码">
-        <a class="loginbtn" href="javascript:void(0);">登录</a>
-        <div class="logingray verticalbetween">
-            <a href="javascript:void(0);">忘记密码</a>
-            <router-link to="/login/register">
-                <a href="javascript:void(0);">创建账户</a>
+    <div class="loginwrap">
+        <div class="topleft">
+            <router-link to="/">
+                <img src="./../../static/images/icon/homesign.png" alt="">
             </router-link>
         </div>
+        <router-view></router-view>
     </div>
 </template>
 
