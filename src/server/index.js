@@ -4,18 +4,15 @@ import favicon from 'serve-favicon'
 import logger from 'morgan'
 import bodyParser from 'body-parser'
 import webpack from 'webpack'
+import querystring from 'querystring'
 import url from 'url'
-
 // 引入history模块
 import history from 'connect-history-api-fallback'
-
 // 正式环境时，下面两个模块不需要引入
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
-
 import config from '../../build/webpack.dev.conf'
-
-import mysql from 'mysql'
+import * as modelcommon from './model/modelcommon.js'
 
 const app = express()
 
@@ -98,26 +95,62 @@ app.post('/result', function (req, res) {
 
 
 app.post('/haveUserName', function (req, res) {
-    var user_name=(JSON.stringify(req.body));
-    console.log("User name = "+user_name);
-    var connection = mysql.createConnection({
-        host     : '127.0.0.1',
-        user     : 'root',
-        password : 'PASSroot1234',
-        port: '3306',
-        database: 'mytodo',
-    });
-    connection.connect();
-    var sql = 'SELECT * FROM user';
 
-    connection.query(sql,function (err, result) {
-        if(err){
-            console.log('[SELECT ERROR] - ',err.message);
-            return;
-        }
-        res.send(user_name);
+    var body = "";
+    req.on('data', function (chunk) {
+        body += chunk;  //一定要使用+=，如果body=chunk，因为请求favicon.ico，body会等于{}
+        console.log("chunk:",chunk);
     });
-    connection.end();
+
+
+    req.on('end', function () {
+        // 解析参数
+        body = querystring.parse(body);  //将一个字符串反序列化为一个对象
+        console.log("body:",body);
+
+
+        console.log("=======");
+        Object.keys(body).forEach((element, index, array) => {
+            console.log(element);
+            // 循环传过来的参数，有username执行开始执行havethisname
+            if(element == "username"){
+                console.log("开始执行havethisname");
+                console.log(modelcommon.havethisname());
+            }
+        });
+        console.log("=======");
+
+
+        res.send(body);
+        res.end();
+    });
+
+
+
+    // var connection = mysql.createConnection({
+    //     host     : '127.0.0.1',
+    //     user     : 'root',
+    //     password : 'PASSroot1234',
+    //     port: '3306',
+    //     database: 'mytodo',
+    // });
+    // connection.connect();
+    // var sql = 'SELECT * FROM user';
+
+    // connection.query(sql,function (err, result) {
+    //     if(err){
+    //         console.log('[SELECT ERROR] - ',err.message);
+    //         return;
+    //     }
+    //     res.send(user_name);
+    // });
+    // connection.end();
+
+
+
+
+
+
     // var data = {};
     // data.data = req.path;
     // data.originalUrl = req.originzalUrl;
@@ -125,8 +158,6 @@ app.post('/haveUserName', function (req, res) {
     // data.query = data.url.query;
 
 });
-
-
 
 
 

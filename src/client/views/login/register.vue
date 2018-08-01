@@ -40,7 +40,7 @@ export default {
             ajaxargument = `username=${this.username}`
             // console.log(ajaxargument);
             var ajax = new XMLHttpRequest();
-            ajax.open('post',`/haveUserName`);
+            ajax.open('post','/haveUserName');
             ajax.send(ajaxargument);
             ajax.onreadystatechange = function () {
                 if (ajax.readyState==4 &&ajax.status==200) {
