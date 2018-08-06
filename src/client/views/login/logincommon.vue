@@ -39,7 +39,7 @@ export default {
 
     }
     .centerwrap .img{
-        padding: 20px 0 0;
+        padding: 20px 0 20px;
         width: 26%;
     }
     .logininput{

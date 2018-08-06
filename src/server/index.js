@@ -12,7 +12,7 @@ import history from 'connect-history-api-fallback'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import config from '../../build/webpack.dev.conf'
-import * as modelcommon from './model/modelcommon.js'
+import {havethisname,findname} from './model/modelcommon.js'
 
 const app = express()
 
@@ -93,6 +93,19 @@ app.post('/result', function (req, res) {
 
 
 
+/**
+ *
+ 用于查找user表是否含有特定username
+ *
+ @method haveUserName
+ *
+ @param { } 参数名 参数说明
+ *
+ *      {
+            status:0=>'失败',1=>'成功',
+            data:查询的username信息,
+        }
+*/
 
 app.post('/haveUserName', function (req, res) {
 
@@ -104,25 +117,36 @@ app.post('/haveUserName', function (req, res) {
 
 
     req.on('end', function () {
+        // 生成返回格式对象
+        let resdata = {};
+
+
         // 解析参数
         body = querystring.parse(body);  //将一个字符串反序列化为一个对象
         console.log("body:",body);
 
 
-        console.log("=======");
+
         Object.keys(body).forEach((element, index, array) => {
             console.log(element);
             // 循环传过来的参数，有username执行开始执行havethisname
             if(element == "username"){
                 console.log("开始执行havethisname");
-                console.log(modelcommon.havethisname());
+                havethisname(body.username).then(function (data){
+                    resdata['data'] = data;
+                    resdata['status'] = 1;
+                    res.send(resdata);
+                    res.end();
+                },function (res){
+                    resdata['data'] = res;
+                    resdata['status'] = 0;
+                    res.send(resdata);
+                    res.end();
+                });
             }
         });
-        console.log("=======");
 
 
-        res.send(body);
-        res.end();
     });
 
 

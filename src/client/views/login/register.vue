@@ -6,6 +6,7 @@
             type="text"
             placeholder="账号"
 
+            :class="[succeed?'logininputsucceed':'',failure?'logininputfailure':'']"
             v-model="username"
         >
         <input
@@ -31,11 +32,14 @@ export default {
     data () {
         return {
             username:"",
-            password:""
+            password:"",
+            succeed:false,
+            failure:false,
         }
     },
     watch:{
         username:function (){
+            var that = this;
             var ajaxargument = "";
             ajaxargument = `username=${this.username}`
             // console.log(ajaxargument);
@@ -44,8 +48,19 @@ export default {
             ajax.send(ajaxargument);
             ajax.onreadystatechange = function () {
                 if (ajax.readyState==4 &&ajax.status==200) {
-            　　　　console.log(ajax.responseText);//输入相应的内容
-              　　}
+                    var data = JSON.parse(ajax.responseText);
+                    console.log(data);//输入相应的内容
+                    if(data.status == 1){
+                        console.log(data.data.length);
+                        if(data.data.length == 0){
+                            that.succeed = true;
+                            that.failure = false;
+                        }else{
+                            that.succeed = false;
+                            that.failure = true;
+                        }
+                    }
+                }
             }
         }
     },
@@ -75,6 +90,14 @@ export default {
         margin: 10px 0;
         font-size: 16px;
         color: #a98604;
+        outline: none;
+    }
+    .logininputsucceed{
+        box-shadow:0px 5px 10px -5px #39c163;
+        /* box-shadow:0px 5px 10px -5px #0084c6; */
+    }
+    .logininputfailure{
+        box-shadow:0px 5px 10px -5px #c33030;
     }
     .centerwrap .logininputregister::-webkit-input-placeholder {
         color: #8fa2dc;
