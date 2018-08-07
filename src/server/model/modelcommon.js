@@ -35,6 +35,39 @@ const havethisname = function (username){
     return promise;
 }
 
+const savename = function (option){
+    console.log(option);
+    const promise = new Promise(function(resolve, reject){
+        var connection = mysql.createConnection({
+            host     : config.host,
+            user     : config.user,
+            password : config.password,
+            port: config.port,
+            database: config.database,
+        });
+
+        connection.connect();
+
+        var addSql = 'INSERT INTO user(username,password) VALUES(?,?)';
+        var addSqlParams = [option.username, option.password];
+        //增
+
+        connection.query(addSql,addSqlParams,function (err, result) {
+            if(err){
+                console.log('[INSERT ERROR] - ',err.message);
+                reject(err.message);
+            }
+            resolve(result);
+
+        });
+
+        connection.end();
+    });
+
+    return promise;
+
+}
 
 
-export {havethisname,findname}
+
+export {havethisname,findname,savename}

@@ -1,22 +1,29 @@
 <template>
     <div class="centerwrap">
         <img class="img" src="./../../static/images/common/login.png" alt="">
-        <input
-            class="logininput logininputregister"
-            type="text"
-            placeholder="账号"
+        <div class="usernamewrap">
+            <input
+                class="logininput logininputregister"
+                type="text"
+                placeholder="账号"
 
-            :class="[succeed?'logininputsucceed':'',failure?'logininputfailure':'']"
-            v-model="username"
-        >
-        <input
-            class="logininput logininputregister"
-            type="password"
-            placeholder="密码"
+                :class="[succeed?'logininputsucceed':'',failure?'logininputfailure':'']"
+                v-model="username"
+            >
+            <div v-show="showusernamestatus" :class="[succeed?'succeed':'failure']"></div>
+        </div>
+        <div class="passwordwrap">
+            <input
+                class="logininput logininputregister locationmiddle"
+                :type="passwordtype"
+                placeholder="密码"
 
-            v-model="password"
-        >
-        <a class="loginbtn loginbtnregister" href="javascript:void(0);">注册</a>
+                v-model="password"
+            >
+            <div :class="[showpassword?'showpassword':'notshowpassword']" @click="togglepassword();"></div>
+        </div>
+
+        <a @click="savename();" class="loginbtn loginbtnregister" href="javascript:void(0);">注册</a>
         <div class="logingray logingrayregister verticalbetween">
             <a href="javascript:void(0);"></a>
             <router-link to="/login">
@@ -33,16 +40,39 @@ export default {
         return {
             username:"",
             password:"",
+
+            // 是否显示username状态，默认不显示
+            showusernamestatus:false,
+            // 可以注册
             succeed:false,
+            // 不可以注册，已有相同用户名
             failure:false,
+            // 是否显示密码，默认不显示
+            showpassword:false,
+
+            // 是否在请求，用于username()的请求节流
+            isgetname:false,
+            timeout:'',
+            passwordtype:'password',
         }
     },
     watch:{
         username:function (){
+            clearTimeout(this.timeout);
+            this.timeout = setTimeout(() =>{
+                this.getusername();
+            }, 500);
+        }
+    },
+    methods:{
+        getusername:function (){
+
             var that = this;
             var ajaxargument = "";
-            ajaxargument = `username=${this.username}`
+            ajaxargument = `username=${this.username}`;
+
             // console.log(ajaxargument);
+
             var ajax = new XMLHttpRequest();
             ajax.open('post','/haveUserName');
             ajax.send(ajaxargument);
@@ -52,13 +82,54 @@ export default {
                     console.log(data);//输入相应的内容
                     if(data.status == 1){
                         console.log(data.data.length);
-                        if(data.data.length == 0){
-                            that.succeed = true;
-                            that.failure = false;
-                        }else{
+                        if(that.username.length >= 1){
+                            that.showusernamestatus = true;
+                            if(data.data.length == 0){
+                                that.succeed = true;
+                                that.failure = false;
+                            }else{
+                                that.succeed = false;
+                                that.failure = true;
+                            }
+                        }else if(that.username.length == 0){
+                            that.showusernamestatus = false;
                             that.succeed = false;
-                            that.failure = true;
+                            that.failure = false;
                         }
+                    }
+                }
+            }
+        },
+        togglepassword:function (){
+            this.showpassword = !this.showpassword;
+            if(this.showpassword){
+                this.passwordtype = "text";
+            }else{
+                this.passwordtype = "password";
+            }
+        },
+        savename:function (){
+            var that = this;
+            var ajaxargument = "";
+            ajaxargument = `username=${this.username}&password=${this.password}`;
+
+            var ajax = new XMLHttpRequest();
+            ajax.open('post','/savename');
+            ajax.send(ajaxargument);
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState==4 &&ajax.status==200) {
+                    var data = JSON.parse(ajax.responseText);
+                    var data = ajax.responseText;
+                    console.log(data);//输入相应的内容
+                    if(data.status == 1){
+                        layer.open({
+                            content: "注册成功",
+                            skin: 'msg',
+                            time: 2,
+                        });
+                        var time = setTimeout(()=>{
+                            this.$router.push({path: '/login'});
+                        },2000);
                     }
                 }
             }
@@ -85,7 +156,7 @@ export default {
     .centerwrap .logininputregister{
         border: none;
         border-bottom: 1px solid #e2e2e2;
-        width: 80%;
+        width: 100%;
         line-height: 50px;
         margin: 10px 0;
         font-size: 16px;
@@ -126,5 +197,49 @@ export default {
         color: #a0a0a0;
         text-decoration: none;
         font-size: 14px;
+    }
+    .locationmiddle::before{
+        content: " ";
+        position: relative;
+        display: block;
+        width: 10px;
+        height: 10px;
+        top: 50%;
+        left: 0;
+        background-color: #39c163;
+    }
+    .usernamewrap, .passwordwrap{
+        width: 80%;
+        position: relative;
+    }
+    .showpassword, .notshowpassword, .succeed, .failure{
+        content: " ";
+        position: absolute;
+        display: block;
+        width: 20px;
+        height: 20px;
+        top: 50%;
+        right: 0;
+        transform: translate(0, -50%);
+    }
+    .showpassword{
+        /* tick.svg */
+        /* cross.svg */
+        /* show.svg */
+        /* hide.svg */
+        background: url('./../../static/images/icon/hide.svg');
+        background-size: 20px 20px;
+    }
+    .notshowpassword{
+        background: url('./../../static/images/icon/show.svg');
+        background-size: 20px 20px;
+    }
+    .succeed{
+        background: url('./../../static/images/icon/tick.svg');
+        background-size: 20px 20px;
+    }
+    .failure{
+        background: url('./../../static/images/icon/cross.svg');
+        background-size: 20px 20px;
     }
 </style>

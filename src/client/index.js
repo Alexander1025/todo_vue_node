@@ -4,6 +4,8 @@ import router from './router/index'
 import store from './store/store'
 
 import axios from 'axios'
+import layer from './static/js/layer.js'
+import './static/css/layer.css';
 
 Vue.config.debug = true
 Vue.config.productionTip = false

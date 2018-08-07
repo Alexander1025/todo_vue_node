@@ -12,7 +12,7 @@ import history from 'connect-history-api-fallback'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import config from '../../build/webpack.dev.conf'
-import {havethisname,findname} from './model/modelcommon.js'
+import {havethisname,savename} from './model/modelcommon.js'
 
 const app = express()
 
@@ -61,36 +61,6 @@ app.use(express.static(path.join(__dirname, 'views')))
 
 // 业务
 // ===========================================================
-
-
-app.post('/result', function (req, res) {
-    var connection = mysql.createConnection({
-        host     : '127.0.0.1',
-        user     : 'root',
-        password : 'PASSroot1234',
-        port: '3306',
-        database: 'mytodo',
-    });
-    connection.connect();
-    var sql = 'SELECT * FROM user';
-    connection.query(sql,function (err, result) {
-            if(err){
-                console.log('[SELECT ERROR] - ',err.message);
-                return;
-            }
-        res.send(result);
-    });
-    connection.end();
-    // var data = {};
-    // data.data = req.path;
-    // data.originalUrl = req.originzalUrl;
-    // data.url = url.parse(req.url, true);
-    // data.query = data.url.query;
-
-});
-
-
-
 
 
 /**
@@ -187,7 +157,56 @@ app.post('/haveUserName', function (req, res) {
 
 
 
+/**
+ *
+ 用于查找user表是否含有特定username
+ *
+ @method savename
+ *
+ @param { } 参数名 参数说明
+ *
+ *      {
+            status:0=>'失败',1=>'成功',
+            data:查询的username信息,
+        }
+*/
 
+app.post('/savename', function (req, res) {
+
+    var body = "";
+    req.on('data', function (chunk) {
+        body += chunk;  //一定要使用+=，如果body=chunk，因为请求favicon.ico，body会等于{}
+        console.log("chunk:",chunk);
+    });
+
+
+
+    req.on('end', function () {
+
+        // 生成返回格式对象
+        let resdata = {};
+
+
+        // 解析参数
+        body = querystring.parse(body);  //将一个字符串反序列化为一个对象
+        console.log("body:",body);
+
+        savename(body).then(function (data){
+            resdata['data'] = data;
+            resdata['status'] = 1;
+            res.send(resdata);
+            res.end();
+        },function (res){
+            resdata['data'] = res;
+            resdata['status'] = 0;
+            res.send(resdata);
+            res.end();
+        });
+    });
+
+
+
+});
 
 
 
