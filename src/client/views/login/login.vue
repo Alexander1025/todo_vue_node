@@ -1,9 +1,27 @@
 <template>
     <div class="centerwrap">
         <img class="img" src="./../../static/images/common/login.png" alt="">
-        <input class="logininput" type="text" placeholder="账号">
-        <input class="logininput" type="password" placeholder="密码">
-        <a class="loginbtn" href="javascript:void(0);">登录</a>
+        <div class="usernamewrap">
+            <input
+                class="logininput"
+                type="text"
+                placeholder="账号"
+
+                v-focus
+                v-model="username"
+            >
+        </div>
+        <div class="passwordwrap">
+            <input
+                class="logininput"
+                :type="passwordtype"
+                placeholder="密码"
+
+                v-model="password"
+            >
+            <div :class="[showpassword?'showpassword':'notshowpassword']" @click="togglepassword();"></div>
+        </div>
+        <a @click="loginsubmit" class="loginbtn" href="javascript:void(0);">登录</a>
         <div class="logingray verticalbetween">
             <a href="javascript:void(0);">忘记密码</a>
             <router-link to="/login/register">
@@ -14,11 +32,17 @@
 </template>
 
 <script>
+import {trim,myparse} from './../../static/js/common.js';
 
 export default {
     data () {
         return {
-            message: ''
+            username:"",
+            password:"",
+
+            // 是否显示密码，默认不显示
+            showpassword:false,
+            passwordtype:'password',
         }
     },
     components:{
@@ -34,6 +58,56 @@ export default {
         // 　　　　console.log(ajax2.responseText);//输入相应的内容
         //   　　}
         // }
+    },
+    methods:{
+        togglepassword:function (){
+            this.showpassword = !this.showpassword;
+            if(this.showpassword){
+                this.passwordtype = "text";
+            }else{
+                this.passwordtype = "password";
+            }
+        },
+        loginsubmit:function (){
+            [this.username,this.password] = trim(this.username,this.password);
+
+            if(this.username == "" || this.password == ""){
+                layer.open({
+                    content: "请填写完整账号与密码",
+                    skin: 'msg',
+                    time: 2,
+                });
+                return false;
+            }
+
+
+            var that = this;
+            var ajaxargument = "";
+            ajaxargument = `username=${this.username}&password=${this.password}`;
+
+            var ajax = new XMLHttpRequest();
+            ajax.open('post','/login');
+            ajax.send(ajaxargument);
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState==4 &&ajax.status==200) {
+                    var data = ajax.responseText;
+                    data = myparse(data);
+                    console.log(data);//输入相应的内容
+                    if(data.status == 1){
+                        layer.open({
+                            content: "登录成功",
+                            skin: 'msg',
+                            time: 2,
+                        });
+                        // return false;
+                        var time = setTimeout(()=>{
+                            that.$router.push({path: '/'});
+                        },2000);
+                    }
+                }
+            }
+            console.log("asdasd");
+        }
     }
 }
 </script>
@@ -49,11 +123,12 @@ export default {
     .logininput{
         border: none;
         border-bottom: 1px solid #e2e2e2;
-        width: 80%;
+        width: 100%;
         line-height: 50px;
         margin: 10px 0;
         font-size: 16px;
         color: #a98604;
+        outline: none;
     }
     .logininput::-webkit-input-placeholder {
         color: #62a7ca;
@@ -92,5 +167,39 @@ export default {
         color: #a0a0a0;
         text-decoration: none;
         font-size: 14px;
+    }
+    .usernamewrap, .passwordwrap{
+        width: 80%;
+        position: relative;
+    }
+    .showpassword, .notshowpassword, .succeed, .failure{
+        content: " ";
+        position: absolute;
+        display: block;
+        width: 20px;
+        height: 20px;
+        top: 50%;
+        right: 0;
+        transform: translate(0, -50%);
+    }
+    .showpassword{
+        /* tick.svg */
+        /* cross.svg */
+        /* show.svg */
+        /* hide.svg */
+        background: url('./../../static/images/icon/hide.svg');
+        background-size: 20px 20px;
+    }
+    .notshowpassword{
+        background: url('./../../static/images/icon/show.svg');
+        background-size: 20px 20px;
+    }
+    .succeed{
+        background: url('./../../static/images/icon/tick.svg');
+        background-size: 20px 20px;
+    }
+    .failure{
+        background: url('./../../static/images/icon/cross.svg');
+        background-size: 20px 20px;
     }
 </style>

@@ -7,6 +7,7 @@
                 type="text"
                 placeholder="账号"
 
+                v-focus
                 :class="[succeed?'logininputsucceed':'',failure?'logininputfailure':'']"
                 v-model="username"
             >
@@ -34,6 +35,7 @@
 </template>
 
 <script>
+import {trim,myparse} from './../../static/js/common.js';
 
 export default {
     data () {
@@ -78,7 +80,8 @@ export default {
             ajax.send(ajaxargument);
             ajax.onreadystatechange = function () {
                 if (ajax.readyState==4 &&ajax.status==200) {
-                    var data = JSON.parse(ajax.responseText);
+                    var data = ajax.responseText;
+                    data = myparse(data);
                     console.log(data);//输入相应的内容
                     if(data.status == 1){
                         console.log(data.data.length);
@@ -109,6 +112,25 @@ export default {
             }
         },
         savename:function (){
+            [this.username,this.password] = trim(this.username,this.password);
+
+            if(this.username == "" || this.password == ""){
+                layer.open({
+                    content: "请填写完整账号与密码",
+                    skin: 'msg',
+                    time: 2,
+                });
+                return false;
+            }
+
+            if(this.failure){
+                layer.open({
+                    content: "已有相同用户名",
+                    skin: 'msg',
+                    time: 2,
+                });
+                return false;
+            }
             var that = this;
             var ajaxargument = "";
             ajaxargument = `username=${this.username}&password=${this.password}`;
@@ -118,8 +140,8 @@ export default {
             ajax.send(ajaxargument);
             ajax.onreadystatechange = function () {
                 if (ajax.readyState==4 &&ajax.status==200) {
-                    var data = JSON.parse(ajax.responseText);
                     var data = ajax.responseText;
+                    data = myparse(data);
                     console.log(data);//输入相应的内容
                     if(data.status == 1){
                         layer.open({
@@ -128,7 +150,7 @@ export default {
                             time: 2,
                         });
                         var time = setTimeout(()=>{
-                            this.$router.push({path: '/login'});
+                            that.$router.push({path: '/login'});
                         },2000);
                     }
                 }
