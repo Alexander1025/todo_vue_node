@@ -95,18 +95,16 @@ export default {
                     console.log(data);//输入相应的内容
                     if(data.status == 1){
                         layer.open({
-                            content: "登录成功",
+                            content: `${data.data[0].username},欢迎回来`,
                             skin: 'msg',
                             time: 2,
                         });
-                        // return false;
                         var time = setTimeout(()=>{
                             that.$router.push({path: '/'});
                         },2000);
                     }
                 }
             }
-            console.log("asdasd");
         }
     }
 }

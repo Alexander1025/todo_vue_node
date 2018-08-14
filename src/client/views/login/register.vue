@@ -112,7 +112,7 @@ export default {
             }
         },
         savename:function (){
-            [this.username,this.password] = trim(this.username,this.password);
+            [this.usern9ame,this.password] = trim(this.username,this.password);
 
             if(this.username == "" || this.password == ""){
                 layer.open({

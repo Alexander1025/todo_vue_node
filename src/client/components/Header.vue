@@ -1,13 +1,21 @@
 <template>
     <div class="header_common">
-        {{datemo}}月
+        <span>
+            {{this.$store.state.datemonth}}月
+        </span>
+        <span>
+            {{this.$store.state.datemonth}}月
+        </span>
+        <span>
+            {{this.$store.state.username}}
+        </span>
     </div>
 </template>
 <script>
 export default {
     data () {
         return {
-            datemo: "八",
+
         }
     }
 }
@@ -24,6 +32,15 @@ export default {
         text-align: center;
         line-height: 50px;
         font-size: 18px;
+
+
+        display: flex;
+        flex-flow:row nowrap;
+        justify-content:space-between;
+        align-items:center;
+    }
+    .header_common span{
+        flex:0 1 18%;
     }
 </style>
 

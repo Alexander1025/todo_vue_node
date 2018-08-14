@@ -3,6 +3,7 @@ import path from 'path'
 import favicon from 'serve-favicon'
 import logger from 'morgan'
 import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
 import webpack from 'webpack'
 import querystring from 'querystring'
 import url from 'url'
@@ -13,6 +14,7 @@ import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import config from '../../build/webpack.dev.conf'
 import {havethisname,savename,login} from './model/loginmodel.js'
+import {getuser} from './model/indexmodel.js'
 
 const app = express()
 
@@ -24,6 +26,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 const compiler = webpack(config)
@@ -229,6 +232,7 @@ app.post('/login', function (req, res) {
             if(data.length > 0){
                 resdata['data'] = data;
                 resdata['status'] = 1;
+                res.cookie('userid', data[0]['userid'], { expires: new Date(Date.now() + 3600000), httpOnly: true });
                 res.send(resdata);
                 res.end();
             }else{
@@ -249,6 +253,133 @@ app.post('/login', function (req, res) {
 
 
 
+/**
+ *
+ 用于获取用户信息
+ *
+ @method getuser
+ *
+ @param { } 参数名 参数说明
+ *
+ *      {
+
+        }
+*/
+
+app.post('/getuser', function (req, res) {
+
+    console.log(req);
+    // for(var key in  req.cookies){
+    //     console.log("cookie名:"+key);
+    //     console.log(",cookie值:"+req.cookies[key]+"<br />");
+    // }
+
+    var body = "";
+    req.on('data', function (chunk) {
+        body += chunk;  //一定要使用+=，如果body=chunk，因为请求favicon.ico，body会等于{}
+        console.log("chunk:",chunk);
+    });
+    req.on('end', function () {
+        // 生成返回格式对象
+        let resdata = {};
+        // 解析参数
+        body = querystring.parse(body);  //将一个字符串反序列化为一个对象
+        console.log("body:",body);
+
+        // 业务开始
+        getuser(req.cookies['userid']).then(function (data){
+            console.log(data);
+            if(data.length > 0){
+                resdata['data'] = data;
+                resdata['status'] = 1;
+                res.send(resdata);
+                res.end();
+            }else{
+                resdata['data'] = data;
+                resdata['status'] = 0;
+                res.send(resdata);
+                res.end();
+            }
+        },function (res){
+            resdata['data'] = res;
+            resdata['status'] = 0;
+            res.send(resdata);
+            res.end();
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ *
+ 用于测试
+ *
+ @method text
+ *
+ @param { } 参数名 参数说明
+ *
+ *      {
+
+        }
+*/
+
+app.post('/text', function (req, res) {
+
+    for(var key in  req.cookies){
+        console.log("cookie名:"+key);
+        console.log(",cookie值:"+req.cookies[key]+"<br />");
+    }
+
+    var body = "";
+    req.on('data', function (chunk) {
+        body += chunk;  //一定要使用+=，如果body=chunk，因为请求favicon.ico，body会等于{}
+        console.log("chunk:",chunk);
+    });
+    req.on('end', function () {
+        // 生成返回格式对象
+        let resdata = {};
+        // 解析参数
+        body = querystring.parse(body);  //将一个字符串反序列化为一个对象
+        console.log("body:",body);
+
+        // 业务开始
+        login(body).then(function (data){
+            console.log(data);
+            if(data.length > 0){
+                resdata['data'] = data;
+                resdata['status'] = 1;
+                res.cookie('userid', data[0]['userid'], { expires: new Date(Date.now() + 3600000), httpOnly: true });
+                res.send(resdata);
+                res.end();
+            }else{
+                resdata['data'] = data;
+                resdata['status'] = 0;
+                res.send(resdata);
+                res.end();
+            }
+        },function (res){
+            resdata['data'] = res;
+            resdata['status'] = 0;
+            res.send(resdata);
+            res.end();
+        });
+    });
+});
 
 
 
