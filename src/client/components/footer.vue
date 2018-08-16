@@ -2,15 +2,15 @@
     <div class="footer_common">
         <div>
             <img src="./../static/images/icon/task_gray.svg" alt="">
-            <span>任务</span>
+            <span>任 务</span>
         </div>
         <div>
             <img src="./../static/images/icon/calendar_gray.svg" alt="">
-            <span>日历</span>
+            <span>日 历</span>
         </div>
         <div>
             <img src="./../static/images/icon/set_gray.svg" alt="">
-            <span>设置</span>
+            <span>设 置</span>
         </div>
     </div>
 </template>
