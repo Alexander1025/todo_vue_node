@@ -2,12 +2,14 @@
     <div class="indexwrap">
         <headerCommon></headerCommon>
         <calendar></calendar>
+        <footerCommon></footerCommon>
     </div>
 </template>
 
 <script>
 import headerCommon from './../../components/Header.vue';
 import calendar from './../../components/calendar.vue';
+import footerCommon from './../../components/footer.vue';
 
 export default {
     data () {
@@ -17,7 +19,8 @@ export default {
     },
     components:{
         headerCommon,
-        calendar
+        calendar,
+        footerCommon,
     },
     mounted:function (){
         let date = new Date();

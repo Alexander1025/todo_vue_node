@@ -6,7 +6,10 @@
         <span>
             {{this.$store.state.datemonth}}月
         </span>
-        <span>
+        <span
+            :class="[this.$store.state.islogin ? 'islo' : 'notlogin']"
+            @click="goLogin"
+        >
             {{this.$store.state.username}}
         </span>
     </div>
@@ -16,6 +19,13 @@ export default {
     data () {
         return {
 
+        }
+    },
+    methods:{
+        goLogin:function (){
+            if(!this.$store.state.islogin){
+                this.$router.push({path: '/login'});
+            }
         }
     }
 }
@@ -41,6 +51,10 @@ export default {
     }
     .header_common span{
         flex:0 1 18%;
+    }
+    .notlogin{
+        font-size: 16px;
+        color: #e6b85c;
     }
 </style>
 
