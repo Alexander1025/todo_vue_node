@@ -14,6 +14,10 @@ import login from './../views/login/login.vue';
 import register from './../views/login/register.vue';
 
 
+import test from './../views/test/test.vue';
+
+
+
 Vue.use(Router)
 
 var router = new Router({
@@ -30,7 +34,11 @@ var router = new Router({
                 { path: '', component: login },
                 { path: 'register', component: register },
             ]
-        }
+        },
+        {
+            path: '/test',
+            component: test
+        },
         // { name: 'hello', path: '/hello', component: Hello }
     ]
 })
