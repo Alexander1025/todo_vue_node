@@ -22,7 +22,6 @@ const store = new Vuex.Store({
     },
     actions: {
         getUserMsg (store,mon) {
-            // var store = store;
 
             var that = this;
             var ajax = new XMLHttpRequest();

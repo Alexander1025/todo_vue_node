@@ -2,6 +2,8 @@
     <div class="indexwrap">
         <headerCommon></headerCommon>
         <calendar></calendar>
+        <taskcomponent></taskcomponent>
+
         <footerCommon></footerCommon>
     </div>
 </template>
@@ -9,6 +11,7 @@
 <script>
 import headerCommon from './../../components/Header.vue';
 import calendar from './../../components/calendar.vue';
+import taskcomponent from './../../components/taskcomponent.vue';
 import footerCommon from './../../components/footer.vue';
 
 export default {
@@ -20,6 +23,7 @@ export default {
     components:{
         headerCommon,
         calendar,
+        taskcomponent,
         footerCommon,
     },
     mounted:function (){

@@ -1,15 +1,36 @@
 <template>
     <div class="footer_common">
-        <div>
-            <img src="./../static/images/icon/task_gray.svg" alt="">
+        <div :class="[this.$store.state.footerindex == 0 ? 'thisdiv' : '']">
+            <img
+                src="./../static/images/icon/task_blue.svg" alt=""
+                v-if="this.$store.state.footerindex == 0"
+            >
+            <img
+                src="./../static/images/icon/task_gray.svg" alt=""
+                v-else
+            >
             <span>任 务</span>
         </div>
-        <div>
-            <img src="./../static/images/icon/calendar_gray.svg" alt="">
+        <div :class="[this.$store.state.footerindex == 1 ? 'thisdiv' : '']">
+            <img
+                src="./../static/images/icon/calendar_blue.svg" alt=""
+                v-if="this.$store.state.footerindex == 1"
+            >
+            <img
+                src="./../static/images/icon/calendar_gray.svg" alt=""
+                v-else
+            >
             <span>日 历</span>
         </div>
-        <div>
-            <img src="./../static/images/icon/set_gray.svg" alt="">
+        <div :class="[this.$store.state.footerindex == 2 ? 'thisdiv' : '']">
+            <img
+                src="./../static/images/icon/set_blue.svg" alt=""
+                v-if="this.$store.state.footerindex == 2"
+            >
+            <img
+                src="./../static/images/icon/set_gray.svg" alt=""
+                v-else
+            >
             <span>设 置</span>
         </div>
     </div>
@@ -52,6 +73,10 @@ export default {
         display: block;
         line-height: 16px;
         font-size: 12px;
+        color: #8a8a8a;
+    }
+    .footer_common > div.thisdiv > span{
+        color: #1296db;
     }
 </style>
 
