@@ -1,12 +1,12 @@
 <template>
     <div class="tasklist">
         <div class="tasklistimg" v-if="this.item.status == 1">
-            <img src="./../static/images/icon/radio_blue.svg" alt="">
+            <img src="./../static/images/icon/emptyradio.svg" alt="">
         </div>
         <div class="tasklistimg" v-else-if="this.item.status == 2">
-            <img src="./../static/images/icon/emptyradio_blue.svg" alt="">
+            <img src="./../static/images/icon/radio.svg" alt="">
         </div>
-        <div class="taskdescribe">{{this.item.text}}</div>
+        <div class="taskdescribe" :class="[status == 2 ? 'emptytext' : '']">{{this.item.text}}</div>
         <div class="tasktime">{{this.item.text}}</div>
     </div>
 </template>
@@ -45,9 +45,9 @@ export default {
         text-align: center;
     }
     .tasklistimg img{
-        width: 80%;
+        width: 60%;
         line-height: 52px;
-        vertical-align: middle;
+        vertical-align: bottom;
     }
     .taskdescribe{
         flex: 0 1 65%;
@@ -60,5 +60,8 @@ export default {
         color: #bdbdbd;
         font-weight: 100;
         font-size: 12px;
+    }
+    .emptytext{
+        color: #909090;
     }
 </style>

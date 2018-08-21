@@ -36,44 +36,44 @@ export default {
                 {
                     id:1,
                     text:"测试1",
-                    status: 2,
+                    status: 1,
                 },
                 {
                     id:2,
                     text:"测试2",
-                    status: 2,
+                    status: 1,
                 },
                 {
                     id:3,
                     text:"测试3",
-                    status: 2,
+                    status: 1,
                 },
                 {
                     id:4,
                     text:"测试4",
-                    status: 2,
+                    status: 1,
                 },
             ],
             comtasklist:[
                 {
                     id:1,
                     text:"测试1",
-                    status: 1,
+                    status: 2,
                 },
                 {
                     id:2,
                     text:"测试2",
-                    status: 1,
+                    status: 2,
                 },
                 {
                     id:3,
                     text:"测试3",
-                    status: 1,
+                    status: 2,
                 },
                 {
                     id:4,
                     text:"测试4",
-                    status: 1,
+                    status: 2,
                 },
             ]
         }
@@ -98,6 +98,7 @@ export default {
     }
     .task{
         overflow: scroll;
+        margin-top: 300px;
         /* display: none; */
     }
 </style>
