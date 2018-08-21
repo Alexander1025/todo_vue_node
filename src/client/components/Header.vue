@@ -1,5 +1,5 @@
 <template>
-    <div class="header_common">
+    <div class="header_common" ref="header">
         <span>
             {{this.$store.state.datemonth}}月
         </span>
@@ -27,12 +27,15 @@ export default {
                 this.$router.push({path: '/login'});
             }
         }
+    },
+    mounted:function (){
+        console.log("header");
     }
 }
 </script>
 <style>
     .header_common{
-        position: relative;
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;

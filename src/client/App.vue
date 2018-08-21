@@ -1,6 +1,7 @@
 <template>
     <div class="app full-height">
         <router-view></router-view>
+        <div class="bottom"></div>
     </div>
 </template>
 
@@ -36,5 +37,8 @@ body {
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
+}
+.bottom{
+    height: 49px;
 }
 </style>

@@ -51,7 +51,7 @@ export default {
 
     },
     mounted:function(){
-
+        console.log("calendar");
 
 
 
@@ -268,7 +268,9 @@ export default {
 
 
     .calendar{
-
+        position: fixed;
+        top: 50px;
+        left: 0;
     }
     .calendar ul, .calendar li{
         list-style: none;
@@ -286,6 +288,7 @@ export default {
     }
     .calendarmain{
         flex-wrap: wrap;
+        background-color: white;
     }
     .calendarmain > div{
         width: 14.28%;

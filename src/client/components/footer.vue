@@ -56,6 +56,7 @@ export default {
         width: 100%;
         border-top: 1px solid #ccc;
         padding: 5px 0 3px;
+        background-color: white;
 
         display: flex;
         flex-flow: row nowrap;
