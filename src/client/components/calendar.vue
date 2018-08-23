@@ -1,5 +1,5 @@
 <template>
-    <div class="calendar">
+    <div class="calendar" ref="calendar">
         <ul class="calendartop acrossflex">
             <li class="orange">日</li>
             <li>一</li>
@@ -51,7 +51,6 @@ export default {
 
     },
     mounted:function(){
-        console.log("calendar");
 
 
 

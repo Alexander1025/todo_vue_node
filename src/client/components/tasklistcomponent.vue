@@ -19,7 +19,7 @@ export default {
         }
     },
     mounted:function (){
-        console.log("tasklist");
+        // console.log("tasklist");
     }
 }
 </script>

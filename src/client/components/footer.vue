@@ -43,7 +43,7 @@ export default {
         }
     },
     mounted:function (){
-        console.log(this.$store.state.footerindex);
+        // console.log(this.$store.state.footerindex);
 
     }
 }

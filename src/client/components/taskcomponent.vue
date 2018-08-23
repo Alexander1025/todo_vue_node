@@ -1,5 +1,5 @@
 <template>
-    <div class="task" ref="task">
+    <div class="task" ref="task" :style="{ top: tasktop + 'px', height: taskheight + 'px'}">
         <div class="tasktop">
             {{this.tasktoptext}}
         </div>
@@ -31,6 +31,8 @@ import tasklist from './tasklistcomponent.vue';
 export default {
     data () {
         return {
+            tasktop:0,
+            taskheight:0,
             tasktoptext: "今天",
             protasklist:[
                 {
@@ -82,9 +84,20 @@ export default {
         tasklist,
     },
     mounted:function (){
+        this.$nextTick(function () {
+            for(let i = 0 , j = this.$parent.$children ; i <= j.length-1 ; i++){
+                if(this.$parent.$children[i].$el.className == "header_common" || this.$parent.$children[i].$el.className == "calendar"){
+                    this.tasktop += this.$parent.$children[i].$el.offsetHeight;
+                }
+            }
+            for(let i = 0 , j = this.$parent.$children ; i <= j.length-1 ; i++){
+                if(this.$parent.$children[i].$el.className == "footer_common"){
+                    this.taskheight = (document.body.clientHeight || document.documentElement.clientHeight) - this.$parent.$children[i].$el.offsetHeight - this.tasktop;
+                }
+            }
+            this.$refs.task.style.display = "block";
+        })
 
-        console.log("task");
-        // this.$refs.task.style.display = "block";
     }
 }
 </script>
@@ -98,7 +111,10 @@ export default {
     }
     .task{
         overflow: scroll;
-        margin-top: 300px;
-        /* display: none; */
+        display: none;
+        position: fixed;
+        top:0;
+        left: 0;
+        width: 100%;
     }
 </style>

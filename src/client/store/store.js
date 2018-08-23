@@ -10,6 +10,7 @@ const store = new Vuex.Store({
         username: "hi",
         islogin:false,
         footerindex:1,
+        headerheight:0,
     },
     mutations: {
         getMonth:function (store,mon){
@@ -18,7 +19,7 @@ const store = new Vuex.Store({
         },
         setState:function (store,option){
             store[option.attr] = option.field;
-        }
+        },
     },
     actions: {
         getUserMsg (store,mon) {
@@ -41,10 +42,7 @@ const store = new Vuex.Store({
                     }
                 }
             }
-
-
-
-        }
+        },
     }
 })
 

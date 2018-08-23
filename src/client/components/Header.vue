@@ -29,7 +29,7 @@ export default {
         }
     },
     mounted:function (){
-        console.log("header");
+
     }
 }
 </script>
