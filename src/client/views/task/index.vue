@@ -1,8 +1,6 @@
 <template>
     <div class="indexwrap">
         <headerCommon></headerCommon>
-        <calendar></calendar>
-        <taskcomponent></taskcomponent>
 
         <footerCommon></footerCommon>
     </div>
@@ -10,8 +8,6 @@
 
 <script>
 import headerCommon from './../../components/Header.vue';
-import calendar from './../../components/calendar.vue';
-import taskcomponent from './../../components/taskcomponent.vue';
 import footerCommon from './../../components/footer.vue';
 
 export default {
@@ -22,18 +18,10 @@ export default {
     },
     components:{
         headerCommon,
-        calendar,
-        taskcomponent,
         footerCommon,
     },
     mounted:function (){
-        let date = new Date();
-        let mon = date.getMonth();
-        this.$store.commit('getMonth',mon);
-
-        this.$store.dispatch('getUserMsg');
-
-        this.$store.commit('setState',{attr:'footerindex',field:1});
+        this.$store.commit('setState',{attr:'footerindex',field:0});
     }
 }
 </script>

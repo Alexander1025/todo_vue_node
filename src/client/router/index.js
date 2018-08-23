@@ -13,6 +13,7 @@ import logincommon from './../views/login/logincommon.vue';
 import login from './../views/login/login.vue';
 import register from './../views/login/register.vue';
 
+import task from './../views/task/index.vue';
 
 import test from './../views/test/test.vue';
 
@@ -36,9 +37,24 @@ var router = new Router({
             ]
         },
         {
+            path: '/task',
+            component: task,
+            children: [
+                { path: '', component: task },
+                { path: 'index', component: task },
+            ]
+        },
+
+
+
+
+
+
+        {
             path: '/test',
             component: test
         },
+
         // { name: 'hello', path: '/hello', component: Hello }
     ]
 })

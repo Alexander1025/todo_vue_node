@@ -1,37 +1,43 @@
 <template>
     <div class="footer_common">
         <div :class="[this.$store.state.footerindex == 0 ? 'thisdiv' : '']">
-            <img
-                src="./../static/images/icon/task_blue.svg" alt=""
-                v-if="this.$store.state.footerindex == 0"
-            >
-            <img
-                src="./../static/images/icon/task_gray.svg" alt=""
-                v-else
-            >
-            <span>任 务</span>
+            <router-link to="/task/index">
+                <img
+                    src="./../static/images/icon/append_blue.svg" alt=""
+                    v-if="this.$store.state.footerindex == 0"
+                >
+                <img
+                    src="./../static/images/icon/append_gray.svg" alt=""
+                    v-else
+                >
+                <span>任 务</span>
+            </router-link>
         </div>
         <div :class="[this.$store.state.footerindex == 1 ? 'thisdiv' : '']">
-            <img
-                src="./../static/images/icon/calendar_blue.svg" alt=""
-                v-if="this.$store.state.footerindex == 1"
-            >
-            <img
-                src="./../static/images/icon/calendar_gray.svg" alt=""
-                v-else
-            >
-            <span>日 历</span>
+            <router-link to="/">
+                <img
+                    src="./../static/images/icon/calendar_blue.svg" alt=""
+                    v-if="this.$store.state.footerindex == 1"
+                >
+                <img
+                    src="./../static/images/icon/calendar_gray.svg" alt=""
+                    v-else
+                >
+                <span>日 历</span>
+            </router-link>
         </div>
         <div :class="[this.$store.state.footerindex == 2 ? 'thisdiv' : '']">
-            <img
-                src="./../static/images/icon/set_blue.svg" alt=""
-                v-if="this.$store.state.footerindex == 2"
-            >
-            <img
-                src="./../static/images/icon/set_gray.svg" alt=""
-                v-else
-            >
-            <span>设 置</span>
+            <router-link to="">
+                <img
+                    src="./../static/images/icon/set_blue.svg" alt=""
+                    v-if="this.$store.state.footerindex == 2"
+                >
+                <img
+                    src="./../static/images/icon/set_gray.svg" alt=""
+                    v-else
+                >
+                <span>设 置</span>
+            </router-link>
         </div>
     </div>
 </template>
@@ -67,16 +73,19 @@ export default {
         align-self: center;
         text-align: center;
     }
-    .footer_common > div > img{
+    .footer_common > div > a{
+        text-decoration: none;
+    }
+    .footer_common > div > a > img{
         width: 20px;
     }
-    .footer_common > div > span{
+    .footer_common > div > a > span{
         display: block;
         line-height: 16px;
         font-size: 12px;
         color: #8a8a8a;
     }
-    .footer_common > div.thisdiv > span{
+    .footer_common > div.thisdiv > a > span{
         color: #1296db;
     }
 </style>
