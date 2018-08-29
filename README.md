@@ -165,10 +165,18 @@
                 - 任务开始时间
             - taskto
                 - 任务结束时间
+
+
+            - taskmoment
+                - 任务提醒时刻 16:00
+
+            - taskdateline
+                - 任务提醒日期
+
             - taskperiod
                 - 任务周期
-            - taskreminddate
-                - 任务提醒 (时刻)
+            <!-- - taskreminddate
+                - 任务提醒 (时刻) -->
             - taskremindweek
                 - 任务提醒 (星期)
             - taskremindday
