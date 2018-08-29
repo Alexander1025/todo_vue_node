@@ -29,7 +29,11 @@ export default {
         }
     },
     mounted:function (){
+        let date = new Date();
+        let mon = date.getMonth();
+        this.$store.commit('getMonth',mon);
 
+        this.$store.dispatch('getUserMsg');
     }
 }
 </script>

@@ -15,6 +15,8 @@ import register from './../views/login/register.vue';
 
 import task from './../views/task/index.vue';
 
+import setting from './../views/setting/index.vue';
+
 import test from './../views/test/test.vue';
 
 
@@ -42,6 +44,14 @@ var router = new Router({
             children: [
                 { path: '', component: task },
                 { path: 'index', component: task },
+            ]
+        },
+        {
+            path: '/setting',
+            component: setting,
+            children: [
+                { path: '', component: setting },
+                { path: 'index', component: setting },
             ]
         },
 

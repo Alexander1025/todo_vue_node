@@ -30,6 +30,7 @@
 </template>
 <script>
 import { tween, easing } from 'popmotion';
+import { setTimeout } from 'timers';
 
 export default {
     props:["item","status"],
@@ -80,13 +81,12 @@ export default {
                 this.resilience(this.slideleft, -this.taskwidth);
                 this.offset = -this.taskwidth;
             }
-        },
-        resilience:function (start, end){
-            tween({ from: start, to: end, duration: 400, ease: easing.backOut}).start(
-                (slideleft) => {
-                    this.slideleft = slideleft;
-                }
-            );
+
+            let thistask = setTimeout(() => {
+                this.resilience(this.slideleft, 0);
+                this.taskstatus = 0;
+                this.offset = 0;
+            },2000);
         },
         taskclick:function (){
             if(this.taskstatus != 0){
@@ -95,7 +95,17 @@ export default {
                 this.offset = 0;
                 return false;
             }
-        }
+        },
+
+
+
+        resilience:function (start, end){
+            tween({ from: start, to: end, duration: 400, ease: easing.backOut}).start(
+                (slideleft) => {
+                    this.slideleft = slideleft;
+                }
+            );
+        },
     }
 }
 </script>

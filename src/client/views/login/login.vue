@@ -102,6 +102,13 @@ export default {
                         var time = setTimeout(()=>{
                             that.$router.push({path: '/'});
                         },2000);
+                    }else{
+                        that.password = "";
+                        layer.open({
+                            content: `账号或密码错误，请重新输入`,
+                            skin: 'msg',
+                            time: 2,
+                        });
                     }
                 }
             }
