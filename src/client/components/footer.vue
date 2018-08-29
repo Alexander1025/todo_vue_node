@@ -26,7 +26,7 @@
                 <span>日 历</span>
             </router-link>
         </div>
-        <div :class="[this.$store.state.footerindex == 2 ? 'thisdiv' : '']">
+        <div :class="[this.$store.state.footerindex == 2 ? 'thisdiv' : '']" @click="logout();">
             <router-link to="">
                 <img
                     src="./../static/images/icon/set_blue.svg" alt=""
@@ -46,6 +46,11 @@ export default {
     data () {
         return {
 
+        }
+    },
+    methods:{
+        logout:function (){
+            this.$store.dispatch('logout');
         }
     },
     mounted:function (){

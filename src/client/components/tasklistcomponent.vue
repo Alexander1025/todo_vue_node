@@ -13,7 +13,8 @@
                 :class="[status == 2 ? 'emptytext' : '']"
                 @touchstart="touchstart"
                 @touchmove="touchmove"
-                @touchend="touchend">
+                @touchend="touchend"
+                @click="taskclick">
                 {{this.item.text}}
             </div>
 
@@ -64,7 +65,7 @@ export default {
             }else if(translationleft > 0){
                 // this.slideleft = (translationleft)/((translationleft)/80+0.8);
                 // this.slideleft = (translationleft)/(((translationleft*translationleft)/10000)+1);
-                this.slideleft = (Math.atan(translationleft/this.multiple))*this.multiple;
+                this .slideleft = (Math.atan(translationleft/this.multiple))*this.multiple;
                 this.taskstatus = 0;
             }
             // console.log("touchmove");
@@ -86,6 +87,14 @@ export default {
                     this.slideleft = slideleft;
                 }
             );
+        },
+        taskclick:function (){
+            if(this.taskstatus != 0){
+                this.resilience(this.slideleft, 0);
+                this.taskstatus = 0;
+                this.offset = 0;
+                return false;
+            }
         }
     }
 }

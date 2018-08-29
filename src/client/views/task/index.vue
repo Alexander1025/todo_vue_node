@@ -21,6 +21,12 @@ export default {
         footerCommon,
     },
     mounted:function (){
+        let date = new Date();
+        let mon = date.getMonth();
+        this.$store.commit('getMonth',mon);
+
+        this.$store.dispatch('getUserMsg');
+
         this.$store.commit('setState',{attr:'footerindex',field:0});
     }
 }

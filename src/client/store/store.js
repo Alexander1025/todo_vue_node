@@ -10,7 +10,6 @@ const store = new Vuex.Store({
         username: "hi",
         islogin:false,
         footerindex:1,
-        headerheight:0,
     },
     mutations: {
         getMonth:function (store,mon){
@@ -43,6 +42,24 @@ const store = new Vuex.Store({
                 }
             }
         },
+        logout (store){
+            var that = this;
+            var ajax = new XMLHttpRequest();
+            ajax.open('post','/logout');
+            ajax.send();
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState==4 &&ajax.status==200) {
+                    var data = ajax.responseText;
+                    data = myparse(data);
+                    // console.log(data);//输入相应的内容
+                    if(data.status == 1){
+                        store.commit('setState',{attr:'username',field:'请登录'});
+                        store.commit('setState',{attr:'islogin',field:false});
+                    }
+                }
+            }
+
+        }
     }
 })
 

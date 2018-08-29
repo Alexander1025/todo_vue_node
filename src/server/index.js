@@ -201,7 +201,7 @@ app.post('/savename', function (req, res) {
 
 /**
  *
- 用于登录，记录cokect信息等
+ 用于登录，记录cookie信息等
  *
  @method login
  *
@@ -250,6 +250,39 @@ app.post('/login', function (req, res) {
     });
 });
 
+
+/**
+ *
+ 用于登出，清除记录cookie信息等
+ *
+ @method logout
+ *
+ @param { } 参数名 参数说明
+ *
+ *      {
+            status:0=>'失败',1=>'成功',
+        }
+*/
+app.post('/logout', function (req, res) {
+    var body = "";
+    req.on('data', function (chunk) {
+        body += chunk;  //一定要使用+=，如果body=chunk，因为请求favicon.ico，body会等于{}
+        console.log("chunk:",chunk);
+    });
+    req.on('end', function () {
+        // 生成返回格式对象
+        let resdata = {};
+        // 解析参数
+        body = querystring.parse(body);  //将一个字符串反序列化为一个对象
+        console.log("body:",body);
+
+
+        res.clearCookie('userid');
+        resdata['status'] = 1;
+        res.send(resdata);
+        res.end();
+    });
+});
 
 
 
