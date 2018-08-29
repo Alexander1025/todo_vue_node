@@ -26,8 +26,8 @@
                 <span>日 历</span>
             </router-link>
         </div>
-        <div :class="[this.$store.state.footerindex == 2 ? 'thisdiv' : '']" @click="logout();">
-            <router-link to="">
+        <div :class="[this.$store.state.footerindex == 2 ? 'thisdiv' : '']">
+            <router-link to="/setting/index">
                 <img
                     src="./../static/images/icon/set_blue.svg" alt=""
                     v-if="this.$store.state.footerindex == 2"
@@ -49,9 +49,7 @@ export default {
         }
     },
     methods:{
-        logout:function (){
-            this.$store.dispatch('logout');
-        }
+
     },
     mounted:function (){
         // console.log(this.$store.state.footerindex);
