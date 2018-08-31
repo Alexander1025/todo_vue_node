@@ -10,6 +10,7 @@ const store = new Vuex.Store({
         username: "hi",
         islogin:false,
         footerindex:1,
+        theme:[0,""], //主题, 0-背景颜色, 1-图片
     },
     mutations: {
         getMonth:function (store,mon){
@@ -53,6 +54,11 @@ const store = new Vuex.Store({
                     data = myparse(data);
                     // console.log(data);//输入相应的内容
                     if(data.status == 1){
+                        layer.open({
+                            content: "已安全登出",
+                            skin: 'msg',
+                            time: 2,
+                        });
                         store.commit('setState',{attr:'username',field:'请登录'});
                         store.commit('setState',{attr:'islogin',field:false});
                     }

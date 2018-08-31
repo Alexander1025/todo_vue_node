@@ -287,7 +287,7 @@ export default {
     }
     .calendarmain{
         flex-wrap: wrap;
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.5);
     }
     .calendarmain > div{
         width: 14.28%;

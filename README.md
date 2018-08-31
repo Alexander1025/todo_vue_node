@@ -135,7 +135,7 @@
                 - 年龄
             - sex
                 - 性别
-            - grade
+            - vip_level
                 - 等级
 
 
