@@ -15,7 +15,10 @@ import register from './../views/login/register.vue';
 
 import task from './../views/task/index.vue';
 
+import settingcommon from './../views/setting/settingcommon.vue';
 import setting from './../views/setting/index.vue';
+import theme from './../views/setting/theme.vue';
+
 
 import test from './../views/test/test.vue';
 
@@ -48,10 +51,11 @@ var router = new Router({
         },
         {
             path: '/setting',
-            component: setting,
+            component: settingcommon,
             children: [
                 { path: '', component: setting },
                 { path: 'index', component: setting },
+                { path: 'theme', component: theme}
             ]
         },
 

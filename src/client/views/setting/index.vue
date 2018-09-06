@@ -1,113 +1,76 @@
 <template>
-    <div class="indexwrap">
-        <headerCommon ref="headerCommon"></headerCommon>
-
-        <div class="setting" ref="setting" :style="{ top: settingtop + 'px', height: settingheight + 'px'}">
-
-            <div class="settingwrap">
-                <ul>
-                    <!-- <router-link to="/setting/theme"> -->
-                        <li>
-                            <span class="flexleft"><img src="./../../static/images/icon/theme.svg" alt=""></span>
-                            <span class="flexmian">主题</span>
-                            <span class="flexdescribe">默认</span>
-                            <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
-                        </li>
-                    <!-- </router-link> -->
-                    <li>
-                        <span class="flexleft"><img src="./../../static/images/icon/grade.svg" alt=""></span>
-                        <span class="flexmian">任务等级偏好</span>
-                        <span class="flexdescribe"></span>
-                        <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
-                    </li>
-                    <li>
-                        <span class="flexleft"><img src="./../../static/images/icon/personal.svg" alt=""></span>
-                        <span class="flexmian">个人信息</span>
-                        <span class="flexdescribe"></span>
-                        <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <span class="flexleft"><img src="./../../static/images/icon/buy.svg" alt=""></span>
-                        <span class="flexmian">购买pro版</span>
-                        <span class="flexdescribe"></span>
-                        <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
-                    </li>
-                    <li>
-                        <span class="flexleft"><img src="./../../static/images/icon/gift.svg" alt=""></span>
-                        <span class="flexmian">赞助</span>
-                        <span class="flexdescribe"></span>
-                        <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
-                    </li>
-                </ul>
-                <ul>
-                    <li @click="logout();">
-                        <span class="flexleft"><img src="./../../static/images/icon/logout.svg" alt=""></span>
-                        <span class="flexmian">登出</span>
-                        <span class="flexdescribe"></span>
-                        <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
-                    </li>
-                </ul>
-            </div>
-
-
-        </div>
-
-        <footerCommon ref="footerCommon"></footerCommon>
+    <div class="settingwrap">
+        <ul>
+            <router-link to="/setting/theme">
+                <li>
+                    <span class="flexleft"><img src="./../../static/images/icon/theme.svg" alt=""></span>
+                    <span class="flexmian">主题</span>
+                    <span class="flexdescribe">默认</span>
+                    <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
+                </li>
+            </router-link>
+            <li>
+                <span class="flexleft"><img src="./../../static/images/icon/grade.svg" alt=""></span>
+                <span class="flexmian">任务等级偏好</span>
+                <span class="flexdescribe"></span>
+                <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
+            </li>
+            <li>
+                <span class="flexleft"><img src="./../../static/images/icon/personal.svg" alt=""></span>
+                <span class="flexmian">个人信息</span>
+                <span class="flexdescribe"></span>
+                <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <span class="flexleft"><img src="./../../static/images/icon/buy.svg" alt=""></span>
+                <span class="flexmian">购买pro版</span>
+                <span class="flexdescribe"></span>
+                <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
+            </li>
+            <li>
+                <span class="flexleft"><img src="./../../static/images/icon/gift.svg" alt=""></span>
+                <span class="flexmian">赞助</span>
+                <span class="flexdescribe"></span>
+                <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
+            </li>
+        </ul>
+        <ul>
+            <li @click="logout();">
+                <span class="flexleft"><img src="./../../static/images/icon/logout.svg" alt=""></span>
+                <span class="flexmian">登出</span>
+                <span class="flexdescribe"></span>
+                <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
+            </li>
+        </ul>
     </div>
 </template>
 
 <script>
-import headerCommon from './../../components/Header.vue';
-import footerCommon from './../../components/footer.vue';
 
 export default {
     data () {
         return {
             message: '',
-            settingtop: 0,
-            settingheight: 0,
         }
     },
     components:{
-        headerCommon,
-        footerCommon,
+
     },
     methods:{
-        logout:function (){
-            this.$store.dispatch('logout');
-        }
+
     },
     mounted:function (){
 
-        this.$store.commit('setState',{attr:'footerindex',field:2});
 
-
-        this.$nextTick(function () {
-
-            this.settingtop += this.$refs.headerCommon.$el.offsetHeight;
-
-            this.settingheight = (document.body.clientHeight || document.documentElement.clientHeight) - this.$refs.footerCommon.$el.offsetHeight - this.settingtop;
-
-            this.$refs.setting.style.display = "block";
-        })
 
     }
 }
 </script>
 
 <style>
-    .setting{
-        overflow: scroll;
-        display: none;
-        position: fixed;
-        top:0;
-        left: 0;
-        width: 100%;
 
-
-    }
     .settingwrap{
         width: 100%;
     }
@@ -119,11 +82,14 @@ export default {
     /* .settingwrap ul:nth-of-type(1){
         border-top:none;
     } */
+    .settingwrap ul a{
+        text-decoration: none;
+    }
     .settingwrap ul{
         border-bottom: 18px solid rgba(97, 127, 223, 0.5);
         background-color: rgba(255, 255, 255, 0.5);
     }
-    .settingwrap ul li:nth-last-of-type(1){
+    .settingwrap ul>li:nth-last-of-type(1){
         border-bottom: none;
     }
     .settingwrap li{
