@@ -194,3 +194,19 @@
         - taskdetails
 
 
+
+
+        - themedetails
+            - themeid
+                - 主题id
+            - themeuser
+                - 主题用户
+            - themehead
+                - 主题
+            - thememain
+                - 主题主体 (记录颜色或者主题图片地址)
+            - status
+                - 主题状态 (0-禁用, 1-启用, 2-正在使用)
+            - tasktype
+                - 主题种类 (1-颜色主题, 2-图片主题)
+

@@ -1,5 +1,10 @@
 <template>
-    <div class="header_common" ref="header">
+    <div
+        class="header_common"
+        ref="header"
+
+        :style=this.$store.state.theme[1]
+    >
         <span>
             {{this.$store.state.datemonth}}月
         </span>

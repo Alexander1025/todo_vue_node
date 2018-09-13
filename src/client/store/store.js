@@ -10,7 +10,7 @@ const store = new Vuex.Store({
         username: "hi",
         islogin:false,
         footerindex:1,
-        theme:[0,""], //主题, 0-背景颜色, 1-图片
+        theme:[0,"",""], //主题, (0-背景颜色, 1-图片), 头部样式， 主体样式
     },
     mutations: {
         getMonth:function (store,mon){
@@ -36,6 +36,9 @@ const store = new Vuex.Store({
                     if(data.status == 1){
                         store.commit('setState',{attr:'username',field:data.data[0].username});
                         store.commit('setState',{attr:'islogin',field:true});
+                        console.log(data.data[0].theme);
+                        let themeArr = data.data[0].theme.split(",");
+                        store.commit('setState',{attr:'theme',field:[themeArr[0],themeArr[1],themeArr.slice(2).join(",")]});
                     }else if(data.status == 0){
                         store.commit('setState',{attr:'username',field:'请登录'});
                         store.commit('setState',{attr:'islogin',field:false});
@@ -61,6 +64,7 @@ const store = new Vuex.Store({
                         });
                         store.commit('setState',{attr:'username',field:'请登录'});
                         store.commit('setState',{attr:'islogin',field:false});
+                        store.commit('setState',{attr:'theme',field:[0,"",""]});
                     }
                 }
             }
