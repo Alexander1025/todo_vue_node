@@ -1,6 +1,9 @@
 <template>
     <div class="app full-height">
-        <div class="bg"></div>
+        <div
+            class="bg"
+            :style=this.$store.state.theme[2]
+        ></div>
         <router-view></router-view>
         <div class="bottom"></div>
     </div>
@@ -32,7 +35,7 @@ body {
     height: 100vh;
     width: 100vw;
     margin: 0;
-    background: url("./static/images/common/bg4.png");
+    /* background: url("./static/images/common/bg4.png"); */
     background-size:100% 100%;
     -webkit-filter: blur(10px);
        -moz-filter: blur(10px);
@@ -40,8 +43,9 @@ body {
             filter: blur(10px);
     z-index: -1;
     /* background: linear-gradient(280deg, #accbee 0%, #e7f0fd 100%); */
-    background: #EDEFFB;
+    /* background: #EDEFFB; */
     /* background: linear-gradient(180deg, #dfe9f3 0%, white 100%); */
+    opacity: 0.4;
 }
 .centerwrap{
     display: flex;

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-08-29 11:09:28
+Date: 2018-09-08 14:10:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,6 +24,7 @@ CREATE TABLE `task` (
   `userid` int(11) NOT NULL COMMENT '任务 userid',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '任务状态，0-失效，1-启用',
   `taskname` varchar(255) DEFAULT '' COMMENT '任务名称',
+  `taskdescription` varchar(255) DEFAULT NULL COMMENT '任务描述',
   `tasktype` tinyint(4) DEFAULT NULL COMMENT '任务种类，1-单次， 2-长期， 3-反长期',
   `taskgrade` tinyint(4) DEFAULT '1' COMMENT '任务等级',
   `taskcolor` varchar(255) DEFAULT NULL COMMENT '任务颜色',
@@ -44,29 +45,59 @@ CREATE TABLE `task` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `themedetails`
+-- ----------------------------
+DROP TABLE IF EXISTS `themedetails`;
+CREATE TABLE `themedetails` (
+  `themeid` tinyint(4) NOT NULL AUTO_INCREMENT COMMENT '主题id',
+  `themeuser` tinyint(4) NOT NULL COMMENT '主题用户',
+  `themehead` varchar(255) DEFAULT NULL COMMENT '主题头部颜色',
+  `thememain` varchar(255) NOT NULL COMMENT '主题主体 (记录颜色或者主题图片地址)',
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '主题状态 (0-禁用, 1-启用, 2-正在使用)',
+  `themetype` tinyint(4) NOT NULL DEFAULT '1' COMMENT '主题种类 (1-颜色主题, 2-图片主题)',
+  `themename` varchar(255) DEFAULT NULL COMMENT '主题名称',
+  PRIMARY KEY (`themeid`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of themedetails
+-- ----------------------------
+INSERT INTO `themedetails` VALUES ('1', '0', 'background: #678bff;', 'background: #617FDF;', '1', '1', null);
+INSERT INTO `themedetails` VALUES ('2', '0', 'background: #FD7897;', 'background: linear-gradient(-45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);', '1', '1', null);
+INSERT INTO `themedetails` VALUES ('3', '0', 'background: #9983c5;', 'background: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);', '1', '1', null);
+INSERT INTO `themedetails` VALUES ('4', '0', 'background: #70a0ea;', 'background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);', '1', '1', null);
+INSERT INTO `themedetails` VALUES ('5', '0', 'background: #617fdf;', 'background: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);', '1', '1', null);
+INSERT INTO `themedetails` VALUES ('6', '0', 'background: #617fdf;', 'background: linear-gradient(to right, #fa709a 0%, #fee140 100%);', '1', '1', null);
+INSERT INTO `themedetails` VALUES ('7', '0', 'background: #616161;', 'background: linear-gradient(to right, #f83600 0%, #f9d423 100%);', '1', '1', null);
+INSERT INTO `themedetails` VALUES ('8', '0', 'background: #956de8;', 'background: linear-gradient(to top, #30cfd0 0%, #330867 100%);', '1', '1', null);
+INSERT INTO `themedetails` VALUES ('9', '0', 'background: #449fe8;', 'background: linear-gradient(to top, #09203f 0%, #537895 100%);', '1', '1', null);
+INSERT INTO `themedetails` VALUES ('10', '0', 'background: #678bff;', 'background: linear-gradient(to right, #434343 0%, black 100%);', '1', '1', null);
+INSERT INTO `themedetails` VALUES ('11', '0', 'background: #678bff;', 'background: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);', '1', '1', null);
+
+-- ----------------------------
 -- Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `userid` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'userid',
-  `username` varchar(40) NOT NULL COMMENT '用户名',
-  `password` char(32) NOT NULL COMMENT '密码',
-  `phone` varchar(40) NOT NULL DEFAULT '' COMMENT '手机号',
-  `email` char(11) NOT NULL DEFAULT '' COMMENT 'email',
-  `profession` varchar(50) NOT NULL DEFAULT '' COMMENT '职业',
-  `age` varchar(100) NOT NULL DEFAULT '' COMMENT '年龄',
-  `sex` varchar(20) NOT NULL DEFAULT '' COMMENT '性别',
-  `grade` char(19) NOT NULL DEFAULT '' COMMENT '等级',
-  `realname` varchar(20) NOT NULL DEFAULT '' COMMENT '真实姓名',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '用户状态，1-正常，0-禁用',
-  `vip_level` tinyint(1) NOT NULL DEFAULT '0' COMMENT '会员等级,0-普通会员',
+  `username` varchar(40) CHARACTER SET utf8 NOT NULL COMMENT '用户名',
+  `password` char(32) CHARACTER SET utf8 NOT NULL COMMENT '密码',
+  `theme` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `vip_level` tinyint(1) DEFAULT '0' COMMENT '会员等级,0-普通会员',
+  `phone` varchar(40) CHARACTER SET utf8 DEFAULT '' COMMENT '手机号',
+  `email` char(11) CHARACTER SET utf8 DEFAULT '' COMMENT 'email',
+  `profession` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '' COMMENT '职业',
+  `age` varchar(100) CHARACTER SET utf8 DEFAULT '' COMMENT '年龄',
+  `sex` varchar(20) CHARACTER SET utf8 DEFAULT '' COMMENT '性别',
+  `realname` varchar(20) CHARACTER SET utf8 DEFAULT '' COMMENT '真实姓名',
   PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='用户账号信useruseruser息';
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '123', '123', '', '', '', '', '', '', '', '1', '0');
-INSERT INTO `user` VALUES ('2', '123456', '123456', '', '', '', '', '', '', '', '1', '0');
-INSERT INTO `user` VALUES ('3', '123456789', '123456789', '', '', '', '', '', '', '', '1', '0');
-INSERT INTO `user` VALUES ('4', '159', '159', '', '', '', '', '', '', '', '1', '0');
+INSERT INTO `user` VALUES ('1', '1', '123', '123', null, '0', '', '', '', '', '', '');
+INSERT INTO `user` VALUES ('2', '1', '123456', '123456', null, '0', '', '', '', '', '', '');
+INSERT INTO `user` VALUES ('3', '1', '123456789', '123456789', null, '0', '', '', '', '', '', '');
+INSERT INTO `user` VALUES ('4', '1', '159', '159', null, '0', '', '', '', '', '', '');

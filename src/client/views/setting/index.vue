@@ -59,7 +59,9 @@ export default {
 
     },
     methods:{
-
+        logout:function (){
+            this.$store.dispatch('logout');
+        }
     },
     mounted:function (){
 

@@ -16,15 +16,16 @@
         <div class="passwordwrap">
             <input
                 class="logininput logininputregister locationmiddle"
-                :type="passwordtype"
                 placeholder="密码"
 
+                :type="passwordtype"
                 v-model="password"
+                @keyup="keyup"
             >
             <div :class="[showpassword?'showpassword':'notshowpassword']" @click="togglepassword();"></div>
         </div>
 
-        <a @click="savename();" class="loginbtn loginbtnregister" href="javascript:void(0);">注册</a>
+        <a @click="savename" class="loginbtn loginbtnregister" href="javascript:void(0);">注册</a>
         <div class="logingray logingrayregister verticalbetween">
             <a href="javascript:void(0);"></a>
             <router-link to="/login">
@@ -155,6 +156,11 @@ export default {
                     }
                 }
             }
+        },
+        keyup:function (e){
+            if(e.keyCode == 13){
+                this.savename();
+            }
         }
     },
     components:{
@@ -175,6 +181,10 @@ export default {
 </script>
 
 <style>
+    .loginwrap{
+        background-color: white;
+        height: 100vh;
+    }
     .centerwrap .logininputregister{
         border: none;
         border-bottom: 1px solid #e2e2e2;

@@ -14,10 +14,11 @@
         <div class="passwordwrap">
             <input
                 class="logininput"
-                :type="passwordtype"
                 placeholder="密码"
 
+                :type="passwordtype"
                 v-model="password"
+                @keyup="keyup"
             >
             <div :class="[showpassword?'showpassword':'notshowpassword']" @click="togglepassword();"></div>
         </div>
@@ -112,6 +113,11 @@ export default {
                     }
                 }
             }
+        },
+        keyup:function (e){
+            if(e.keyCode == 13){
+                this.loginsubmit();
+            }
         }
     }
 }
@@ -119,7 +125,8 @@ export default {
 
 <style>
     .loginwrap{
-
+        background-color: white;
+        height: 100vh;
     }
     .centerwrap .img{
         padding: 20px 0 0;
