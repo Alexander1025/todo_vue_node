@@ -18,6 +18,7 @@ import task from './../views/task/index.vue';
 import settingcommon from './../views/setting/settingcommon.vue';
 import setting from './../views/setting/index.vue';
 import theme from './../views/setting/theme.vue';
+import addtheme from './../views/setting/addtheme.vue';
 
 
 import test from './../views/test/test.vue';
@@ -55,7 +56,8 @@ var router = new Router({
             children: [
                 { path: '', component: setting },
                 { path: 'index', component: setting },
-                { path: 'theme', component: theme}
+                { path: 'theme', component: theme },
+                { path: 'addtheme', component: addtheme }
             ]
         },
 

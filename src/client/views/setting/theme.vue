@@ -35,16 +35,29 @@
             </div>
             <div class="thememain">
 
-                <div class="theme">
+                <theme
+                    v-for="(item, index) in privatethemelist"
+                    :themeid="item.themeid"
+                    :title="item.title"
+                    :thisstyle="item.thisstyle"
+                    :thisheadstyle="item.thisheadstyle"
+                    :present="item.present"
+                    :imgsrc="item.imgsrc"
+                    :item="item"
+                    :key="index"
+                    @togglethemeimg="togglethemeimg"
+                >
+                </theme>
+
+                <div class="theme addtheme">
                     <div class="themeheadcolor">
                     </div>
-                    <div class="themecolor">
-                        <img
-                            src=""
-                            alt=""
-                        >
-                    </div>
-                    <span>默认</span>
+                    <router-link to="/setting/addtheme">
+                        <div class="themecolor">
+                            <img src="./../../static/images/icon/add.svg" alt="" >
+                        </div>
+                    </router-link>
+                    <span>自定义</span>
                 </div>
 
             </div>
@@ -150,6 +163,16 @@ export default {
                 //     imgsrc:"",
                 // },
             ],
+            privatethemelist: [
+                {
+                    themeid:1,
+                    title: "默认",
+                    thisstyle: "",
+                    thisheadstyle:"",
+                    present: false,
+                    imgsrc:"",
+                },
+            ]
         }
     },
     components:{
@@ -336,5 +359,20 @@ export default {
         height: 3vw;
         background-color: #617FDF;
         border-radius: 4px;
+    }
+    .addtheme .themecolor, .addtheme .themeheadcolor{
+        background-color: rgba(255, 255, 255, 0);
+        box-shadow: 0px 0px 10px #ccc;
+    }
+    .addtheme{
+        position: relative;
+    }
+    .addtheme .themecolor > img{
+        position: absolute;
+        width: 45%;
+        height: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 </style>
