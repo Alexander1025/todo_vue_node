@@ -96,6 +96,7 @@ export default {
                 }
             }
             this.$refs.task.style.display = "block";
+            this.$refs.task.style
         })
 
     }
