@@ -158,6 +158,7 @@ export default {
         width: 120vw;
         overflow: hidden;
         position: relative;
+        margin-top: -1px;
     }
     .slideright{
         float: left;

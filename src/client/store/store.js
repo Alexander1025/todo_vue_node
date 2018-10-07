@@ -36,9 +36,12 @@ const store = new Vuex.Store({
                     if(data.status == 1){
                         store.commit('setState',{attr:'username',field:data.data[0].username});
                         store.commit('setState',{attr:'islogin',field:true});
-                        console.log(data.data[0].theme);
-                        let themeArr = data.data[0].theme.split(",");
-                        store.commit('setState',{attr:'theme',field:[themeArr[0],themeArr[1],themeArr.slice(2).join(",")]});
+                        // console.log(data.data[0].theme);
+                        if(data.data[0].theme){
+                            let themeArr = data.data[0].theme.split(",");
+                            store.commit('setState',{attr:'theme',field:[themeArr[0],themeArr[1],themeArr.slice(2).join(",")]});
+                        }
+                        
                     }else if(data.status == 0){
                         store.commit('setState',{attr:'username',field:'请登录'});
                         store.commit('setState',{attr:'islogin',field:false});
