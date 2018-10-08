@@ -226,7 +226,7 @@ export default {
         // console.log(date6.getDate());
         // console.log(date6.getDay());
 
-        for(let i = 0 ; i <= (7 - date6.getDay())-1 ; i++){
+        for(let i = 0 ; i <= (7 - date6.getDay())-1+1 ; i++){
             var date7 = new Date();
             date7.setDate(i+1);
             this.idnowlog = this.idnowlog+i+1;
