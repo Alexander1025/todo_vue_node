@@ -1,20 +1,43 @@
-import express from 'express'
-import path from 'path'
-import favicon from 'serve-favicon'
-import logger from 'morgan'
-import bodyParser from 'body-parser'
-import cookieParser from 'cookie-parser'
-import webpack from 'webpack'
-import querystring from 'querystring'
-import url from 'url'
-// 引入history模块
-import history from 'connect-history-api-fallback'
-// 正式环境时，下面两个模块不需要引入
-import webpackDevMiddleware from 'webpack-dev-middleware'
-import webpackHotMiddleware from 'webpack-hot-middleware'
-import config from '../../build/webpack.dev.conf'
-import {havethisname,savename,login} from './model/loginmodel.js'
-import {getuser,gettheme,settheme} from './model/indexmodel.js'
+// import express from 'express'
+// import path from 'path'
+// import favicon from 'serve-favicon'
+// import logger from 'morgan'
+// import bodyParser from 'body-parser'
+// import cookieParser from 'cookie-parser'
+// import webpack from 'webpack'
+// import querystring from 'querystring'
+// import url from 'url'
+// // 引入history模块
+// import history from 'connect-history-api-fallback'
+// // 正式环境时，下面两个模块不需要引入
+// import webpackDevMiddleware from 'webpack-dev-middleware'
+// import webpackHotMiddleware from 'webpack-hot-middleware'
+// import config from '../../build/webpack.dev.conf'
+// import {havethisname,savename,login} from './model/loginmodel.js'
+// import {getuser,gettheme,settheme} from './model/indexmodel.js'
+
+var express = require("express");
+var path = require("path");
+var favicon = require("serve-favicon");
+var logger = require("morgan");
+var bodyParser = require("body-parser");
+var cookieParser = require("cookie-parser");
+var webpack = require("webpack");
+var querystring = require("querystring");
+var url = require("url");
+var history = require("connect-history-api-fallback");
+var webpackDevMiddleware = require("webpack-dev-middleware");
+var webpackHotMiddleware = require("webpack-hot-middleware");
+var config = require("../../build/webpack.dev.conf");
+var loginmodel = require("./model/loginmodel.js");
+var havethisname = loginmodel.loginmodel;
+var savename = loginmodel.savename;
+var login = loginmodel.login;
+var indexmodel = require("./model/indexmodel.js");
+var getuser = indexmodel.getuser;
+var gettheme = indexmodel.gettheme;
+var settheme = indexmodel.settheme;
+
 
 const app = express()
 
@@ -574,4 +597,5 @@ app.listen(SERVER_PORT, () => {
   console.info(`服务已经启动，监听端口${SERVER_PORT}`)
 })
 
-export default app
+// export default app
+exports.app = app;
