@@ -1,5 +1,7 @@
-import * as configfile from './../config/config.js'
-import mysql from 'mysql'
+// import * as configfile from './../config/config.js'
+// import mysql from 'mysql'
+var configfile = require("./../config/config.js");
+var mysql = require("mysql");
 
 const config = configfile.config;
 
@@ -88,4 +90,7 @@ const settheme = function (theme,userid){
     return promise;
 }
 
-export {getuser, gettheme, settheme}
+exports.getuser = getuser;
+exports.gettheme = gettheme;
+exports.settheme = settheme;
+// export {getuser, gettheme, settheme}

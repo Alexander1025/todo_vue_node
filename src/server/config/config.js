@@ -9,6 +9,7 @@ const config = {
 
 
 
-export {
-    config
-}
+exports.config = config;
+// export {
+//     config
+// }

@@ -6,11 +6,15 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "nodemon index.js",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "server": "node src/server/index.js --exec babel-node --presets es2015,stage-2"
   },
   "author": "Konata9 <maochichen@163.com>",
   "license": "MIT",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-stage-2": "^6.24.1",
     "babel-runtime": "^6.23.0",
     "cookie-parser": "^1.4.3",
     "mysql": "^2.15.0",

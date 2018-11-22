@@ -1,5 +1,7 @@
-import * as configfile from './../config/config.js'
-import mysql from 'mysql'
+// import * as configfile from './../config/config.js'
+// import mysql from 'mysql'
+var configfile = require("./../config/config.js");
+var mysql = require("mysql");
 
 const config = configfile.config;
 
@@ -100,5 +102,8 @@ const login = function (option){
 
 }
 
-
-export {havethisname,findname,savename,login}
+exports.havethisname = havethisname;
+exports.findname = findname;
+exports.savename = savename;
+exports.login = login;
+// export {havethisname,findname,savename,login}
