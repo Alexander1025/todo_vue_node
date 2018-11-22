@@ -60,7 +60,7 @@ const compiler = webpack(config)
 // }))
 
 // app.use(webpackHotMiddleware(compiler))
-app.use(express.static(path.join(__dirname, '../server/dist')))
+app.use(express.static(path.join(__dirname, 'views')))
 
 
 
