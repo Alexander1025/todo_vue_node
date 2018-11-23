@@ -23,6 +23,7 @@ import addtheme from './../views/setting/addtheme.vue';
 
 import test from './../views/test/test.vue';
 
+import NotFoundComponent from './../views/404/404.vue';
 
 
 Vue.use(Router)
@@ -70,6 +71,8 @@ var router = new Router({
             path: '/test',
             component: test
         },
+
+        { path: '*', component: NotFoundComponent }
 
         // { name: 'hello', path: '/hello', component: Hello }
     ]
