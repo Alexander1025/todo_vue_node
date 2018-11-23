@@ -34,7 +34,7 @@ export default {
         }
     },
     mounted:function (){
-        let date = new Date();
+        let date = new Date(this.$store.state.setnowdate);
         let mon = date.getMonth();
         this.$store.commit('getMonth',mon);
 

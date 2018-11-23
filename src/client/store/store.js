@@ -6,11 +6,12 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        datemonth: "八",
+        datemonth: "",
         username: "hi",
         islogin:false,
         footerindex:1,
         theme:[0,"",""], //主题, (0-背景颜色, 1-图片), 头部样式， 主体样式
+        setnowdate:new Date(), //设置时间不设置默认当前时间 ，new Date().getTime()+86400000*10
     },
     mutations: {
         getMonth:function (store,mon){

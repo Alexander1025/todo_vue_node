@@ -26,6 +26,7 @@ var webpack = require("webpack");
 var querystring = require("querystring");
 var url = require("url");
 var history = require("connect-history-api-fallback");
+// // 正式环境时，下面两个模块不需要引入
 // var webpackDevMiddleware = require("webpack-dev-middleware");
 // var webpackHotMiddleware = require("webpack-hot-middleware");
 var config = require("../../build/webpack.dev.conf");

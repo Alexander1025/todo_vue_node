@@ -45,6 +45,7 @@ export default {
                 // },
             ],
             idnowlog:0,
+            nowdate: new Date(this.$store.state.setnowdate),
         }
     },
     methods:{
@@ -60,7 +61,7 @@ export default {
 
 
         // 现在
-        var date = new Date();
+        var date = new Date(this.nowdate);
 
 
         // console.log(date);
@@ -78,7 +79,7 @@ export default {
 
 
         // 本月1号
-        var date2 = new Date();
+        var date2 = new Date(this.nowdate);
         // console.log(date2.setDate(1));
         // console.log(date2.setTime(date2.getTime()-86400000));
 
@@ -100,7 +101,7 @@ export default {
 
         // 上月最后一天
 
-        var date3 = new Date();
+        var date3 = new Date(this.nowdate);
         date3.setDate(1);
         date3.setTime(date3.getTime()-(this.onedaytime*1));
 
@@ -118,12 +119,11 @@ export default {
         // console.log("补上上月天数");
 
         // 补上上月日期天数
-        var date4 = new Date();
+        var date4 = new Date(this.nowdate);
         date4.setDate(1);
         date4.setTime(date4.getTime()-(this.onedaytime*1));
         // 上月最后一天的日期数
         var lastday = date4.getDate();
-
 
         // console.log(lastday);
         // console.log(lastday.getFullYear());
@@ -135,7 +135,7 @@ export default {
         if(date4.getDay() !== 0){
         // if(date4.getDay() !== 6){
             for(let i = 0 ; i <= date4.getDay() ; i++){
-                var date5 = new Date();
+                var date5 = new Date(date4);
 
                 // 设置日期天数，本月最后一天日期数 - 本月最后一天星期数 = 显示在日历中第一个上月的日期数
                 date5.setDate(lastday - date4.getDay() + i);
@@ -171,7 +171,7 @@ export default {
         // console.log("本月天数");
 
         // 现在
-        var date6 = new Date();
+        var date6 = new Date(this.nowdate);
         date6.setDate(1);
         if(date6.getMonth()+1 >= 12){
             date6.setMonth(0);
@@ -189,11 +189,11 @@ export default {
         // console.log(date6.getDay());
 
         // 生成本月天数
-        var now = new Date();
+        var now = new Date(this.nowdate);
         for(let i = 0 ; i <= date6.getDate()-1 ; i++){
             // console.log(i);
             // this.idnowlog = i+1;
-            var date7 = new Date();
+            var date7 = new Date(this.nowdate);
             date7.setDate(i+1);
             this.idnowlog = this.idnowlog+i+1;
             var calendardetail = {
@@ -226,8 +226,8 @@ export default {
         // console.log(date6.getDate());
         // console.log(date6.getDay());
 
-        for(let i = 0 ; i <= (7 - date6.getDay())-1+1 ; i++){
-            var date7 = new Date();
+        for(let i = 0 ; i <= (7 - date6.getDay())-1 ; i++){
+            var date7 = new Date(this.nowdate);
             date7.setDate(i+1);
             this.idnowlog = this.idnowlog+i+1;
             var calendardetail = {
