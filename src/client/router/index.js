@@ -25,17 +25,18 @@ import test from './../views/test/test.vue';
 
 
 
-Vue.use(Router)
+Vue.use(Router);
+var path_root = "/mytodo";
 
 var router = new Router({
     mode: 'history',
     routes: [
         {
-            path: '/',
+            path: path_root+'/',
             component: index
         },
         {
-            path: '/login',
+            path: path_root+'/login',
             component: logincommon,
             children: [
                 { path: '', component: login },
@@ -43,7 +44,7 @@ var router = new Router({
             ]
         },
         {
-            path: '/task',
+            path: path_root+'/task',
             component: task,
             children: [
                 { path: '', component: task },
@@ -51,7 +52,7 @@ var router = new Router({
             ]
         },
         {
-            path: '/setting',
+            path: path_root+'/setting',
             component: settingcommon,
             children: [
                 { path: '', component: setting },
@@ -67,7 +68,7 @@ var router = new Router({
 
 
         {
-            path: '/test',
+            path: path_root+'/test',
             component: test
         },
 
