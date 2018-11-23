@@ -65,4 +65,7 @@ body {
 .indexwrap{
     z-index: 1;
 }
+.bgfullcover{
+
+}
 </style>

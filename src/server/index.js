@@ -53,13 +53,14 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 const compiler = webpack(config)
-//webpack 中间件
+// webpack 中间件
+
 // app.use(webpackDevMiddleware(compiler, {
 //   publicPath: config.output.publicPath,
 //   stats: { colors: true }
 // }))
-
 // app.use(webpackHotMiddleware(compiler))
+
 app.use(express.static(path.join(__dirname, 'views')))
 
 
