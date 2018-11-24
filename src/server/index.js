@@ -27,8 +27,8 @@ var querystring = require("querystring");
 var url = require("url");
 var history = require("connect-history-api-fallback");
 // // 正式环境时，下面两个模块不需要引入
-var webpackDevMiddleware = require("webpack-dev-middleware");
-var webpackHotMiddleware = require("webpack-hot-middleware");
+// var webpackDevMiddleware = require("webpack-dev-middleware");
+// var webpackHotMiddleware = require("webpack-hot-middleware");
 var config = require("../../build/webpack.dev.conf");
 var loginmodel = require("./model/loginmodel.js");
 var havethisname = loginmodel.loginmodel;
@@ -56,11 +56,11 @@ app.use(express.static(path.join(__dirname, 'public')))
 const compiler = webpack(config)
 // webpack 中间件
 
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: config.output.publicPath,
-  stats: { colors: true }
-}))
-app.use(webpackHotMiddleware(compiler))
+// app.use(webpackDevMiddleware(compiler, {
+//   publicPath: config.output.publicPath,
+//   stats: { colors: true }
+// }))
+// app.use(webpackHotMiddleware(compiler))
 
 app.use(express.static(path.join(__dirname, 'views')))
 
