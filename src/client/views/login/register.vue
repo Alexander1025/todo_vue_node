@@ -77,7 +77,7 @@ export default {
             // console.log(ajaxargument);
 
             var ajax = new XMLHttpRequest();
-            ajax.open('post','/haveUserName');
+            ajax.open('post','/node/haveUserName');
             ajax.send(ajaxargument);
             ajax.onreadystatechange = function () {
                 if (ajax.readyState==4 &&ajax.status==200) {
@@ -137,7 +137,7 @@ export default {
             ajaxargument = `username=${this.username}&password=${this.password}`;
 
             var ajax = new XMLHttpRequest();
-            ajax.open('post','/savename');
+            ajax.open('post','/node/savename');
             ajax.send(ajaxargument);
             ajax.onreadystatechange = function () {
                 if (ajax.readyState==4 &&ajax.status==200) {

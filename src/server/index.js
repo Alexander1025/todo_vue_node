@@ -105,7 +105,7 @@ app.use(express.static(path.join(__dirname, 'views')))
         }
 */
 
-app.post('/haveUserName', function (req, res) {
+app.post('/node/haveUserName', function (req, res) {
     var body = "";
     req.on('data', function (chunk) {
         body += chunk;  //一定要使用+=，如果body=chunk，因为请求favicon.ico，body会等于{}
@@ -192,7 +192,7 @@ app.post('/haveUserName', function (req, res) {
         }
 */
 
-app.post('/savename', function (req, res) {
+app.post('/node/savename', function (req, res) {
     var body = "";
     req.on('data', function (chunk) {
         body += chunk;  //一定要使用+=，如果body=chunk，因为请求favicon.ico，body会等于{}
@@ -292,7 +292,7 @@ app.post('/node/login', function (req, res) {
             status:0=>'失败',1=>'成功',
         }
 */
-app.post('/logout', function (req, res) {
+app.post('/node/logout', function (req, res) {
     var body = "";
     req.on('data', function (chunk) {
         body += chunk;  //一定要使用+=，如果body=chunk，因为请求favicon.ico，body会等于{}
@@ -328,7 +328,7 @@ app.post('/logout', function (req, res) {
         }
 */
 
-app.post('/getuser', function (req, res) {
+app.post('/node/getuser', function (req, res) {
 
     // console.log(req);
     // for(var key in  req.cookies){
@@ -387,7 +387,7 @@ app.post('/getuser', function (req, res) {
         }
 */
 
-app.post('/gettheme', function (req, res) {
+app.post('/node/gettheme', function (req, res) {
 
     // console.log(req);
     // for(var key in  req.cookies){
@@ -455,7 +455,7 @@ app.post('/gettheme', function (req, res) {
         }
 */
 
-app.post('/settheme', function (req, res) {
+app.post('/node/settheme', function (req, res) {
 
     // console.log(req);
     // for(var key in  req.cookies){
@@ -524,7 +524,7 @@ app.post('/settheme', function (req, res) {
         }
 */
 
-app.post('/text', function (req, res) {
+app.post('/node/text', function (req, res) {
 
     for(var key in  req.cookies){
         console.log("cookie名:"+key);

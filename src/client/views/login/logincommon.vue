@@ -23,7 +23,7 @@ export default {
     mounted: function (){
 
         // var ajax2 = new XMLHttpRequest();
-        // ajax2.open('post','/result');
+        // ajax2.open('post','/node/result');
         // ajax2.send();
         // ajax2.onreadystatechange = function () {
         //     if (ajax2.readyState==4 &&ajax2.status==200) {

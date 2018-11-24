@@ -27,7 +27,7 @@ const store = new Vuex.Store({
 
             var that = this;
             var ajax = new XMLHttpRequest();
-            ajax.open('post','/getuser');
+            ajax.open('post','/node/getuser');
             ajax.send();
             ajax.onreadystatechange = function () {
                 if (ajax.readyState==4 &&ajax.status==200) {
@@ -53,7 +53,7 @@ const store = new Vuex.Store({
         logout (store){
             var that = this;
             var ajax = new XMLHttpRequest();
-            ajax.open('post','/logout');
+            ajax.open('post','/node/logout');
             ajax.send();
             ajax.onreadystatechange = function () {
                 if (ajax.readyState==4 &&ajax.status==200) {

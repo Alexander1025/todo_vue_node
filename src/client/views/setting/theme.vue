@@ -204,7 +204,7 @@ export default {
                     ajaxargument = `themeid=${this.themeid}&thisheadstyle=${this.thisheadstyle}&thisstyle=${this.thisstyle}`;
 
                     var ajax = new XMLHttpRequest();
-                    ajax.open('post','/settheme');
+                    ajax.open('post','/node/settheme');
                     ajax.send(ajaxargument);
                     ajax.onreadystatechange = function () {
                         if (ajax.readyState==4 &&ajax.status==200) {
@@ -253,7 +253,7 @@ export default {
 
 
         var ajax = new XMLHttpRequest();
-        ajax.open('post','/gettheme');
+        ajax.open('post','/node/gettheme');
         ajax.send();
         ajax.onreadystatechange = function () {
             if (ajax.readyState==4 &&ajax.status==200) {
