@@ -87,7 +87,7 @@ export default {
             ajaxargument = `username=${this.username}&password=${this.password}`;
 
             var ajax = new XMLHttpRequest();
-            ajax.open('post','/ajaxnode/login');
+            ajax.open('post','/node/login');
             ajax.send(ajaxargument);
             ajax.onreadystatechange = function () {
                 if (ajax.readyState==4 &&ajax.status==200) {
