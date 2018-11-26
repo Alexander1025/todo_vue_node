@@ -65,7 +65,7 @@ const compiler = webpack(config)
 app.use(express.static(path.join(__dirname, 'views')))
 
 
-console.log(process.env.NODE_ENV);
+
 
 
 
