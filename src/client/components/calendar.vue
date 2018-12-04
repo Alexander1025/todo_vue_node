@@ -175,6 +175,7 @@ export default {
         date6.setDate(1);
         if(date6.getMonth()+1 >= 12){
             date6.setMonth(0);
+            date6.setFullYear(date6.getFullYear()+1);
         }else{
             // 增加一个月
             date6.setMonth(date6.getMonth()+1);
@@ -220,11 +221,12 @@ export default {
         // 补上下月日期天数
         date6.setTime(date6.getTime()+(this.onedaytime*1));
 
-        // console.log(date6);
-        // console.log(date6.getFullYear());
-        // console.log(date6.getMonth()+1);
-        // console.log(date6.getDate());
-        // console.log(date6.getDay());
+        console.log("date6"+date6);
+        console.log("getFullYear"+date6.getFullYear());
+        console.log("getMonth"+date6.getMonth()+1);
+        console.log("getDate"+date6.getDate());
+        console.log("getDay"+date6.getDay());
+
 
         for(let i = 0 ; i <= (7 - date6.getDay())-1 ; i++){
             var date7 = new Date(this.nowdate);
