@@ -1,6 +1,8 @@
 <template>
     <div class="centerwrap">
-        <img class="img" src="./../../static/images/common/logo.png" alt="">
+        <div class="center">
+            <img class="img" src="./../../static/images/common/logo.png" alt="">
+        </div>
         <div class="usernamewrap">
             <input
                 class="logininput"

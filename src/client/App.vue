@@ -27,7 +27,10 @@ export default {
 html {
     height: 100%;
 }
-
+.red{
+    background-color: red;
+    border: 1px solid #ccc;
+}
 body {
     /* display: flex;
     align-items: center;

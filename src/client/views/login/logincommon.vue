@@ -35,6 +35,12 @@ export default {
 </script>
 
 <style>
+    .center .img{
+        margin: auto;
+    }
+    .center{
+        text-align: center;
+    }
     .loginwrap{
         background-color: white;
         height: 100vh;
