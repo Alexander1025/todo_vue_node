@@ -2,7 +2,7 @@
     <div class="loginwrap">
         <div class="topleft">
             <router-link to="/">
-                <img src="./../../static/images/icon/homesign.png" alt="">
+                <img src="./../../static/images/common/logo.png" alt="">
             </router-link>
         </div>
         <router-view></router-view>
@@ -40,7 +40,7 @@ export default {
     }
     .centerwrap .img{
         padding: 20px 0 20px;
-        width: 26%;
+        width: 70%;
     }
     .logininput{
         border: none;
