@@ -2,7 +2,7 @@
     <div class="loginwrap">
         <div class="topleft">
             <router-link to="/">
-                <img src="./../../static/images/common/logo.png" alt="">
+                <img src="./../../static/images/icon/homesign.png" alt="">
             </router-link>
         </div>
         <router-view></router-view>
