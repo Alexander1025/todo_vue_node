@@ -124,14 +124,7 @@ export default {
 </script>
 
 <style>
-    .loginwrap{
-        background-color: white;
-        height: 100vh;
-    }
-    .centerwrap .img{
-        padding: 20px 0 0;
-        width: 26%;
-    }
+
     .logininput{
         border: none;
         border-bottom: 1px solid #e2e2e2;

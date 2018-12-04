@@ -36,7 +36,8 @@ export default {
 
 <style>
     .loginwrap{
-
+        background-color: white;
+        height: 100vh;
     }
     .centerwrap .img{
         padding: 20px 0 20px;
