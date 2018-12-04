@@ -5,6 +5,9 @@
                 <img src="./../../static/images/icon/homesign.png" alt="">
             </router-link>
         </div>
+        <div class="center">
+            <img class="img" src="./../../static/images/common/logo.png" alt="">
+        </div>
         <router-view></router-view>
     </div>
 </template>
