@@ -112,7 +112,6 @@ app.post('/node/haveUserName', function (req, res) {
         console.log("chunk:",chunk);
     });
     req.on('end', function () {
-        // 生成返回格式对象
         let resdata = {};
         // 解析参数
         body = querystring.parse(body);  //将一个字符串反序列化为一个对象
