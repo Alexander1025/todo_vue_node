@@ -117,14 +117,14 @@ app.post('/node/haveUserName', function (req, res) {
         // 解析参数
         body = querystring.parse(body);  //将一个字符串反序列化为一个对象
         console.log("body:",body);
-        var havethisname1 = havethisname;
         Object.keys(body).forEach((element, index, array) => {
             console.log(element);
+            console.log(body.username);
             // 循环传过来的参数，有username执行开始执行havethisname
             if(element == "username"){
 
                 // 业务开始
-                havethisname1(body.username).then(function (data){
+                havethisname(body.username).then(function (data){
                     resdata['data'] = data;
                     resdata['status'] = 1;
                     res.send(resdata);
