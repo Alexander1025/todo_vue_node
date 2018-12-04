@@ -221,11 +221,11 @@ export default {
         // 补上下月日期天数
         date6.setTime(date6.getTime()+(this.onedaytime*1));
 
-        console.log("date6"+date6);
-        console.log("getFullYear"+date6.getFullYear());
-        console.log("getMonth"+date6.getMonth()+1);
-        console.log("getDate"+date6.getDate());
-        console.log("getDay"+date6.getDay());
+        // console.log("date6"+date6);
+        // console.log("getFullYear"+date6.getFullYear());
+        // console.log("getMonth"+date6.getMonth()+1);
+        // console.log("getDate"+date6.getDate());
+        // console.log("getDay"+date6.getDay());
 
 
         for(let i = 0 ; i <= (7 - date6.getDay())-1 ; i++){
