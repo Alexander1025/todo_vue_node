@@ -25,6 +25,8 @@ import test from './../views/test/test.vue';
 
 import NotFoundComponent from './../views/404/404.vue';
 
+import {trim,myparse} from './../static/js/common.js'
+
 
 Vue.use(Router)
 
@@ -49,7 +51,30 @@ var router = new Router({
             children: [
                 { path: '', component: task },
                 { path: 'index', component: task },
-            ]
+            ],
+            beforeEnter: function (to, from, next){
+                var that = this;
+                var ajax = new XMLHttpRequest();
+                ajax.open('post','/node/getuser');
+                ajax.send();
+                ajax.onreadystatechange = function () {
+                    if (ajax.readyState==4 &&ajax.status==200) {
+                        var data = ajax.responseText;
+                        data = myparse(data);
+                        // console.log(data);//输入相应的内容
+                        if(data.status == 1){
+                            next();
+                        }else if(data.status == 0){
+                            layer.open({
+                                content: "请登录",
+                                skin: 'msg',
+                                time: 2,
+                            });
+                            next('/login');
+                        }
+                    }
+                }
+            }
         },
         {
             path: '/setting',

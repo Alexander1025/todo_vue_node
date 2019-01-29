@@ -90,7 +90,119 @@ const settheme = function (theme,userid){
     return promise;
 }
 
+
+
+
+const addtask = function (option){
+    console.log(option);
+    const promise = new Promise(function(resolve, reject){
+        var connection = mysql.createConnection({
+            host     : config.host,
+            user     : config.user,
+            password : config.password,
+            port: config.port,
+            database: config.database,
+        });
+
+        connection.connect();
+
+        var addSql = 'INSERT INTO task(userid,taskname,taskcolor,status) VALUES(?,?,?,?)';
+        var addSqlParams = [option.userid, option.taskname, option.taskcolor, 1];
+        //增
+
+        connection.query(addSql,addSqlParams,function (err, result) {
+            if(err){
+                console.log('[INSERT ERROR] - ',err.message);
+                reject(err.message);
+            }
+            resolve(result);
+
+        });
+
+        connection.end();
+    });
+
+    return promise;
+
+}
+
+
+
+
+
+const gettask = function (userid){
+    const promise = new Promise(function(resolve, reject){
+        var connection = mysql.createConnection({
+            host     : config.host,
+            user     : config.user,
+            password : config.password,
+            port: config.port,
+            database: config.database,
+        });
+        connection.connect();
+
+        var sql = `SELECT * FROM task WHERE userid='${userid}' AND status!=0`;
+
+        connection.query(sql,function (err, result) {
+            if(err){
+                console.log('[SELECT ERROR] - ',err.message);
+                reject(err.message);
+            }
+            resolve(result);
+        });
+        connection.end();
+    });
+
+    return promise;
+}
+
+
+
+
+
+
+const changecomplete = function (option){
+    console.log(option);
+    const promise = new Promise(function(resolve, reject){
+        var connection = mysql.createConnection({
+            host     : config.host,
+            user     : config.user,
+            password : config.password,
+            port: config.port,
+            database: config.database,
+        });
+
+        connection.connect();
+
+        var sql = "UPDATE task SET iscomplete = ? WHERE taskid = ?";
+        var modSqlParams = [option.tostatus, option.taskid];
+        //改
+
+        connection.query(sql,modSqlParams ,function (err, result) {
+            if(err){
+                console.log('[INSERT ERROR] - ',err.message);
+                reject(err.message);
+            }
+            resolve(result);
+
+        });
+
+        connection.end();
+    });
+
+    return promise;
+}
+
+
+
+
+
+
+
 exports.getuser = getuser;
 exports.gettheme = gettheme;
 exports.settheme = settheme;
+exports.addtask = addtask;
+exports.gettask = gettask;
+exports.changecomplete = changecomplete;
 // export {getuser, gettheme, settheme}

@@ -38,6 +38,12 @@ var indexmodel = require("./model/indexmodel.js");
 var getuser = indexmodel.getuser;
 var gettheme = indexmodel.gettheme;
 var settheme = indexmodel.settheme;
+var addtask = indexmodel.addtask;
+var gettask = indexmodel.gettask;
+var changecomplete = indexmodel.changecomplete;
+
+
+
 
 
 const app = express()
@@ -533,12 +539,173 @@ app.post('/node/settheme', function (req, res) {
 
 
 
+/**
+ *
+ 用于调教新加的任务
+ *
+ @method addtask
+ *
+ @param { } 参数名 参数说明
+ *
+ *      {
+
+        }
+*/
+
+app.post('/node/addtask', function (req, res) {
+
+    for(var key in  req.cookies){
+        console.log("cookie名:"+key);
+        console.log(",cookie值:"+req.cookies[key]+"<br />");
+    }
+
+    var body = "";
+    req.on('data', function (chunk) {
+        body += chunk;  //一定要使用+=，如果body=chunk，因为请求favicon.ico，body会等于{}
+        console.log("chunk:",chunk);
+    });
+    req.on('end', function () {
+        // 生成返回格式对象
+        let resdata = {};
+        // 解析参数
+        body = querystring.parse(body);  //将一个字符串反序列化为一个对象
+        console.log("body:",body);
+
+        // 业务开始
+        addtask(body).then(function (data){
+            console.log(data);
+            resdata['data'] = data;
+            resdata['status'] = 1;
+            res.send(resdata);
+            res.end();
+        },function (res){
+            resdata['data'] = res;
+            resdata['status'] = 0;
+            res.send(resdata);
+            res.end();
+        });
+    });
+});
+
+
+
+
+/**
+ *
+ 用于获取任务
+ *
+ @method gettask
+ *
+ @param { } 参数名 参数说明
+ *
+ *      {
+
+        }
+*/
+
+app.post('/node/gettask', function (req, res) {
+
+    for(var key in  req.cookies){
+        console.log("cookie名:"+key);
+        console.log(",cookie值:"+req.cookies[key]+"<br />");
+    }
+
+    var body = "";
+    req.on('data', function (chunk) {
+        body += chunk;  //一定要使用+=，如果body=chunk，因为请求favicon.ico，body会等于{}
+        console.log("chunk:",chunk);
+    });
+    req.on('end', function () {
+        // 生成返回格式对象
+        let resdata = {};
+        // 解析参数
+        body = querystring.parse(body);  //将一个字符串反序列化为一个对象
+        console.log("body:",body);
+        console.log('body.userid: ', body.userid);
+        if(body.userid == 0){
+            resdata['data'] = "没有登录";
+            resdata['status'] = 0;
+            res.send(resdata);
+            res.end();
+        }else{
+            // 业务开始
+            gettask(body.userid).then(function (data){
+                console.log(data);
+                if(data.length > 0){
+                    resdata['data'] = data;
+                    resdata['status'] = 1;
+                    res.send(resdata);
+                    res.end();
+                }else{
+                    resdata['data'] = data;
+                    resdata['status'] = 0;
+                    res.send(resdata);
+                    res.end();
+                }
+            },function (res){
+                resdata['data'] = res;
+                resdata['status'] = -1;
+                res.send(resdata);
+                res.end();
+            });
+        }
+    });
+});
 
 
 
 
 
 
+
+/**
+ *
+ 用于修改任务
+ *
+ @method changecomplete
+ *
+ @param { } 参数名 参数说明
+ *
+ *      {
+
+        }
+*/
+
+app.post('/node/changecomplete', function (req, res) {
+
+    for(var key in  req.cookies){
+        console.log("cookie名:"+key);
+        console.log(",cookie值:"+req.cookies[key]+"<br />");
+    }
+
+    var body = "";
+    req.on('data', function (chunk) {
+        body += chunk;  //一定要使用+=，如果body=chunk，因为请求favicon.ico，body会等于{}
+        console.log("chunk:",chunk);
+    });
+    req.on('end', function () {
+        // 生成返回格式对象
+        let resdata = {};
+        // 解析参数
+        body = querystring.parse(body);  //将一个字符串反序列化为一个对象
+        console.log("body:",body);
+        console.log('body.userid: ', body.userid);
+
+        // 业务开始
+        changecomplete(body).then(function (data){
+            console.log(data);
+            resdata['data'] = "修改成功";
+            resdata['status'] = 1;
+            res.send(resdata);
+            res.end();
+        },function (res){
+            resdata['data'] = res;
+            resdata['status'] = -1;
+            res.send(resdata);
+            res.end();
+        });
+    });
+});
 
 
 

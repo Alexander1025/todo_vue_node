@@ -5,9 +5,11 @@
         </div>
         <div class="tasklistwrap">
             <tasklist
-                v-for="(item, index) in protasklist"
+                v-for="(item, index) in $store.state.tasklist"
+                v-show="!item.status"
                 :item="item"
                 :key="item.id"
+                :bgcolor="item.bgcolor"
             >
             </tasklist>
         </div>
@@ -16,10 +18,12 @@
         </div>
         <div class="tasklistwrap">
             <tasklist
-                v-for="(item, index) in comtasklist"
+                v-for="(item, index) in $store.state.tasklist"
+                v-show="item.status"
                 :item="item"
                 :key="item.id"
                 :status="item.status"
+                :bgcolor="item.bgcolor"
             >
             </tasklist>
         </div>
@@ -33,51 +37,7 @@ export default {
         return {
             tasktop:0,
             taskheight:0,
-            tasktoptext: "今天",
-            protasklist:[
-                {
-                    id:1,
-                    text:"测试1",
-                    status: 1,
-                },
-                {
-                    id:2,
-                    text:"测试2",
-                    status: 1,
-                },
-                {
-                    id:3,
-                    text:"测试3",
-                    status: 1,
-                },
-                {
-                    id:4,
-                    text:"测试4",
-                    status: 1,
-                },
-            ],
-            comtasklist:[
-                {
-                    id:1,
-                    text:"测试1",
-                    status: 2,
-                },
-                {
-                    id:2,
-                    text:"测试2",
-                    status: 2,
-                },
-                {
-                    id:3,
-                    text:"测试3",
-                    status: 2,
-                },
-                {
-                    id:4,
-                    text:"测试4",
-                    status: 2,
-                },
-            ]
+            tasktoptext: "未完成",
         }
     },
     components:{

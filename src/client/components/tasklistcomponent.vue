@@ -1,11 +1,27 @@
 <template>
     <div class="slidewrap" :style="{ left : slideleft + 'px' }">
         <div class="tasklist">
-            <div class="tasklistimg" v-if="this.item.status == 1">
-                <img src="./../static/images/icon/emptyradio.svg" alt="">
+            <div class="tasklistimg" v-if="item.status == 0" @click="changecomplete(item.id, 1, item)">
+                <img
+                    src="./../static/images/icon/emptyradio.svg"
+                    alt=""
+                >
+                <div
+                    class="imgimgbg"
+                    :style="{ backgroundColor: bgcolor }"
+                >
+                </div>
             </div>
-            <div class="tasklistimg" v-else-if="this.item.status == 2">
-                <img src="./../static/images/icon/radio.svg" alt="">
+            <div class="tasklistimg" v-else-if="item.status == 1" @click="changecomplete(item.id, 0, item)">
+                <img
+                    src="./../static/images/icon/radio.svg"
+                    alt=""
+                >
+                <div
+                    class="imgimgbg"
+                    :style="{ backgroundColor: bgcolor }"
+                >
+                </div>
             </div>
 
             <div
@@ -15,12 +31,12 @@
                 @touchmove="touchmove"
                 @touchend="touchend"
                 @click="taskclick">
-                {{this.item.text}}
+                {{item.text}}
             </div>
 
             <div
                 class="tasktime">
-                {{this.item.text}}
+                {{item.text}}
             </div>
         </div>
         <div class="slideright">
@@ -32,8 +48,10 @@
 import { tween, easing } from 'popmotion';
 import { setTimeout } from 'timers';
 
+import {trim,myparse} from './../static/js/common.js';
+
 export default {
-    props:["item","status"],
+    props:["item","status","bgcolor"],
     data () {
         return {
             clientX:0,
@@ -106,6 +124,30 @@ export default {
                 }
             );
         },
+        changecomplete:function (taskid, tostatus, item){
+
+            var ajaxargument = "";
+            ajaxargument = `userid=${this.$store.state.userid}&taskid=${taskid}&tostatus=${tostatus}`;
+            var ajax1 = new XMLHttpRequest();
+            ajax1.open('post','/node/changecomplete');
+            ajax1.send(ajaxargument);
+            ajax1.onreadystatechange = function () {
+                if (ajax1.readyState==4 &&ajax1.status==200) {
+                    var data = ajax1.responseText;
+                    data = myparse(data);
+                    // console.log(data);//输入相应的内容
+                    if(data.status == 1){
+                        item.status = tostatus;
+                    }else if(data.status == 0){
+                        layer.open({
+                            content: "修改不成功",
+                            skin: 'msg',
+                            time: 2,
+                        });
+                    }
+                }
+            }
+        }
     }
 }
 </script>
@@ -133,11 +175,21 @@ export default {
     .tasklistimg{
         flex: 0 1 8%;
         text-align: center;
+        position: relative;
     }
     .tasklistimg img{
         width: 60%;
         line-height: 52px;
         vertical-align: bottom;
+    }
+    .imgimgbg{
+        width: 60%;
+        height: 19px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        opacity: 0.6;
     }
     .taskdescribe{
         flex: 0 1 65%;
@@ -155,6 +207,7 @@ export default {
         color: #909090;
     }
     .slidewrap{
+        height: 52px;
         width: 120vw;
         overflow: hidden;
         position: relative;

@@ -14,6 +14,8 @@ import calendar from './../../components/calendar.vue';
 import taskcomponent from './../../components/taskcomponent.vue';
 import footerCommon from './../../components/footer.vue';
 
+import {trim,myparse} from './../../static/js/common.js';
+
 export default {
     data () {
         return {
@@ -27,7 +29,6 @@ export default {
         footerCommon,
     },
     mounted:function (){
-
         this.$store.commit('setState',{attr:'footerindex',field:1});
     }
 }
