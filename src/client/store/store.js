@@ -83,8 +83,7 @@ const store = new Vuex.Store({
                                 data = myparse(data);
                                 // console.log(data);//输入相应的内容
                                 if(data.status == 1){
-                                    that.state.protasklist = [];
-                                    that.state.comtasklist = [];
+                                    that.state.tasklist = [];
                                     for(var i = 0 ; i <= data.data.length-1 ; i++){
                                         var newObj = {};
                                         newObj.id = data.data[i].taskid;
