@@ -157,6 +157,31 @@ const gettask = function (userid){
 }
 
 
+const deletetask = function (taskid){
+    const promise = new Promise(function(resolve, reject){
+        var connection = mysql.createConnection({
+            host     : config.host,
+            user     : config.user,
+            password : config.password,
+            port: config.port,
+            database: config.database,
+        });
+        connection.connect();
+
+        var delSql = `DELETE FROM task where taskid=${taskid}`;
+        //删
+        connection.query(delSql,function (err, result) {
+            if(err){
+                reject(err.message);
+            }
+            resolve(result);
+        });
+
+        connection.end();
+    });
+
+    return promise;
+}
 
 
 
@@ -205,4 +230,5 @@ exports.settheme = settheme;
 exports.addtask = addtask;
 exports.gettask = gettask;
 exports.changecomplete = changecomplete;
+exports.deletetask = deletetask;
 // export {getuser, gettheme, settheme}

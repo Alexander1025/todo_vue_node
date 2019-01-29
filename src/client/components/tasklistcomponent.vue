@@ -1,5 +1,5 @@
 <template>
-    <div class="slidewrap" :style="{ left : slideleft + 'px' }">
+    <div class="slidewrap" :style="{ left : slideleft + 'px' }" v-if="item.status == 0 || item.status == 1">
         <div class="tasklist">
             <div class="tasklistimg" v-if="item.status == 0" @click="changecomplete(item.id, 1, item)">
                 <img
@@ -39,8 +39,8 @@
                 {{item.text}}
             </div>
         </div>
-        <div class="slideright">
-            test
+        <div class="slideright" @click="deletetask(item.id, item)">
+            删除
         </div>
     </div>
 </template>
@@ -138,6 +138,29 @@ export default {
                     // console.log(data);//输入相应的内容
                     if(data.status == 1){
                         item.status = tostatus;
+                    }else if(data.status == 0){
+                        layer.open({
+                            content: "修改不成功",
+                            skin: 'msg',
+                            time: 2,
+                        });
+                    }
+                }
+            }
+        },
+        deletetask:function (taskid, item){
+            var ajaxargument = "";
+            ajaxargument = `userid=${this.$store.state.userid}&taskid=${taskid}`;
+            var ajax1 = new XMLHttpRequest();
+            ajax1.open('post','/node/deletetask');
+            ajax1.send(ajaxargument);
+            ajax1.onreadystatechange = function () {
+                if (ajax1.readyState==4 &&ajax1.status==200) {
+                    var data = ajax1.responseText;
+                    data = myparse(data);
+                    // console.log(data);//输入相应的内容
+                    if(data.status == 1){
+                        item.status = -1;
                     }else if(data.status == 0){
                         layer.open({
                             content: "修改不成功",
