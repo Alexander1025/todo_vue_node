@@ -6,51 +6,76 @@ import Router from 'vue-router'
 
 // 导入相应的子组件
 // import Hello from './../components/Hello'
-import index from './../views/index/index.vue';
+// import index from './../views/index/index.vue';
 
 
-import logincommon from './../views/login/logincommon.vue';
-import login from './../views/login/login.vue';
-import register from './../views/login/register.vue';
+// import logincommon from './../views/login/logincommon.vue';
+// import login from './../views/login/login.vue';
+// import register from './../views/login/register.vue';
 
-import task from './../views/task/index.vue';
+// import task from './../views/task/index.vue';
 
-import settingcommon from './../views/setting/settingcommon.vue';
-import setting from './../views/setting/index.vue';
-import theme from './../views/setting/theme.vue';
-import addtheme from './../views/setting/addtheme.vue';
+// import settingcommon from './../views/setting/settingcommon.vue';
+// import setting from './../views/setting/index.vue';
+// import theme from './../views/setting/theme.vue';
+// import addtheme from './../views/setting/addtheme.vue';
 
 
-import test from './../views/test/test.vue';
+// import test from './../views/test/test.vue';
 
-import NotFoundComponent from './../views/404/404.vue';
+// import NotFoundComponent from './../views/404/404.vue';
 
 import {trim,myparse} from './../static/js/common.js'
 
 
 Vue.use(Router)
 
+function loadView(view) {
+    // return () => import(/* webpackChunkName: "view-[request]" */ `@/views/${view}.vue`)
+    return () => import(/* webpackChunkName: "view-[request]" */ `./../views/${view}.vue`)
+
+}
+
 var router = new Router({
     mode: 'history',
     routes: [
         {
             path: '/',
-            component: index
+            // component: index,
+            component: loadView('index/index'),
         },
         {
             path: '/login',
-            component: logincommon,
+            // component: logincommon,
+            component: loadView('login/logincommon'),
             children: [
-                { path: '', component: login },
-                { path: 'register', component: register },
+                {
+                    path: '',
+                    // component: login,
+                    component: loadView('login/login'),
+                },
+                {
+                    path: 'register',
+                    // component: register,
+                    component: loadView('login/register'),
+                },
             ]
         },
         {
             path: '/task',
-            component: task,
+            // component: task,
+            component: loadView('task/index'),
             children: [
-                { path: '', component: task },
-                { path: 'index', component: task },
+                {
+                    path: '',
+                    // component: task,
+                    component: loadView('task/index'),
+                },
+                {
+                    path: 'index',
+                    // component: task,
+                    component: loadView('task/index'),
+                },
             ],
             beforeEnter: function (to, from, next){
                 var that = this;
@@ -78,12 +103,29 @@ var router = new Router({
         },
         {
             path: '/setting',
-            component: settingcommon,
+            // component: settingcommon,
+            component: loadView('setting/settingcommon'),
             children: [
-                { path: '', component: setting },
-                { path: 'index', component: setting },
-                { path: 'theme', component: theme },
-                { path: 'addtheme', component: addtheme }
+                {
+                    path: '',
+                    // component: setting,
+                    component: loadView('setting/index'),
+                },
+                {
+                    path: 'index',
+                    // component: setting,
+                    component: loadView('setting/index'),
+                },
+                {
+                    path: 'theme',
+                    // component: theme,
+                    component: loadView('setting/theme'),
+                },
+                {
+                    path: 'addtheme',
+                    // component: addtheme,
+                    component: loadView('setting/addtheme'),
+                }
             ]
         },
 
@@ -94,10 +136,15 @@ var router = new Router({
 
         {
             path: '/test',
-            component: test
+            // component: test,
+            component: loadView('test/test'),
         },
 
-        { path: '*', component: NotFoundComponent }
+        {
+            path: '*',
+            // component: NotFoundComponent,
+            component: loadView('404/404'),
+        }
 
         // { name: 'hello', path: '/hello', component: Hello }
     ]

@@ -39,6 +39,7 @@
             >
                 新增
             </div>
+            <br>
         </div>
 
         <footerCommon></footerCommon>
@@ -132,6 +133,8 @@ export default {
         top: 50px;
         left: 0;
         width: 100vw;
+        height: calc(100vh - 100px);
+        overflow: scroll;
     }
     .taskwrap i, .submit{
         display: block;
