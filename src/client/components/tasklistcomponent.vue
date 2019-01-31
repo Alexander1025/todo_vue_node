@@ -14,7 +14,7 @@
             </div>
             <div class="tasklistimg" v-else-if="item.status == 1" @click="changecomplete(item.id, 0, item)">
                 <img
-                    src="./../static/images/icon/radio.svg"
+                    src="./../static/images/icon/radio1.png"
                     alt=""
                 >
                 <div
@@ -27,17 +27,19 @@
             <div
                 class="taskdescribe"
                 :class="[status == 2 ? 'emptytext' : '']"
+                :style="{ color: color }"
                 @touchstart="touchstart"
                 @touchmove="touchmove"
                 @touchend="touchend"
-                @click="taskclick">
+                @click="taskclick"
+            >
                 {{item.text}}
             </div>
 
-            <div
+            <!-- <div
                 class="tasktime">
                 {{item.text}}
-            </div>
+            </div> -->
         </div>
         <div class="slideright" @click="deletetask(item.id, item)">
             删除
@@ -46,12 +48,11 @@
 </template>
 <script>
 import { tween, easing } from 'popmotion';
-import { setTimeout } from 'timers';
 
 import {trim,myparse} from './../static/js/common.js';
 
 export default {
-    props:["item","status","bgcolor"],
+    props:["item","status","bgcolor","color"],
     data () {
         return {
             clientX:0,
@@ -59,7 +60,8 @@ export default {
             offset:0,
             multiple:40,
             taskwidth:(document.documentElement.clientWidth)*0.2,
-            taskstatus: 0 // 0:初始状态,1:右侧显示,2:左侧显示,3:
+            taskstatus: 0, // 0:初始状态,1:右侧显示,2:左侧显示,3:
+            thistask: '',
         }
     },
     mounted:function (){
@@ -67,9 +69,8 @@ export default {
     },
     methods:{
         touchstart:function (e){
-            // console.log(e);
+            clearTimeout(this.thistask);
             this.clientX = e.changedTouches[0].clientX;
-            // console.log("touchstart");
         },
         touchmove:function (e){
             // console.log(e);
@@ -100,11 +101,12 @@ export default {
                 this.offset = -this.taskwidth;
             }
 
-            let thistask = setTimeout(() => {
+            this.thistask = setTimeout(() => {
                 this.resilience(this.slideleft, 0);
                 this.taskstatus = 0;
                 this.offset = 0;
             },2000);
+            // clearInterval(this.thistask);
         },
         taskclick:function (){
             if(this.taskstatus != 0){
@@ -114,9 +116,6 @@ export default {
                 return false;
             }
         },
-
-
-
         resilience:function (start, end){
             tween({ from: start, to: end, duration: 400, ease: easing.backOut}).start(
                 (slideleft) => {
@@ -201,21 +200,23 @@ export default {
         position: relative;
     }
     .tasklistimg img{
-        width: 60%;
+        width: 20px;
+        height: 20px;
         line-height: 52px;
         vertical-align: bottom;
     }
     .imgimgbg{
-        width: 60%;
-        height: 19px;
+        width: 16px;
+        height: 16px;
         position: absolute;
-        top: 0;
+        top: 50%;
         left: 50%;
-        transform: translate(-50%, 0%);
+        transform: translate(-50%, -50%);
         opacity: 0.6;
     }
     .taskdescribe{
-        flex: 0 1 65%;
+        /* flex: 0 1 65%; */
+        flex: 0 1 85%;
         line-height: 52px;
     }
     .tasktime{

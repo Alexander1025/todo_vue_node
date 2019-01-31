@@ -23,7 +23,7 @@
                 :item="item"
                 :key="item.id"
                 :status="item.status"
-                :bgcolor="item.bgcolor"
+                :color="item.bgcolor"
             >
             </tasklist>
         </div>
