@@ -11,13 +11,13 @@
             </router-link>
             <li>
                 <span class="flexleft"><img src="./../../static/images/icon/grade.svg" alt=""></span>
-                <span class="flexmian">任务等级偏好</span>
+                <span class="flexmian">任务等级偏好(暂未开放)</span>
                 <span class="flexdescribe"></span>
                 <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
             </li>
             <li>
                 <span class="flexleft"><img src="./../../static/images/icon/personal.svg" alt=""></span>
-                <span class="flexmian">个人信息</span>
+                <span class="flexmian">个人信息(暂未开放)</span>
                 <span class="flexdescribe"></span>
                 <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
             </li>
@@ -25,13 +25,13 @@
         <ul>
             <li>
                 <span class="flexleft"><img src="./../../static/images/icon/buy.svg" alt=""></span>
-                <span class="flexmian">购买pro版</span>
+                <span class="flexmian">购买pro版(暂未开放)</span>
                 <span class="flexdescribe"></span>
                 <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
             </li>
             <li>
                 <span class="flexleft"><img src="./../../static/images/icon/gift.svg" alt=""></span>
-                <span class="flexmian">赞助</span>
+                <span class="flexmian">赞助(暂未开放)</span>
                 <span class="flexdescribe"></span>
                 <span class="flexright"><img src="./../../static/images/icon/rightmore.svg" alt=""></span>
             </li>
