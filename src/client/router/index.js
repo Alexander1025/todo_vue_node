@@ -6,7 +6,7 @@ import Router from 'vue-router'
 
 // 导入相应的子组件
 // import Hello from './../components/Hello'
-// import index from './../views/index/index.vue';
+import index from './../views/index/index.vue';
 
 
 // import logincommon from './../views/login/logincommon.vue';
@@ -32,12 +32,7 @@ Vue.use(Router)
 
 function loadView(view) {
     // return () => import(`@/views/${view}.vue`)
-    // return () => import( `./../views/${view}.vue`)
-    var view = view;
-    return function (){
-        return `@/views/${view}.vue`;
-        // return `./../views/${view}.vue`;
-    }
+    return () => import( `./../views/${view}.vue`)
 }
 
 var router = new Router({
@@ -45,8 +40,8 @@ var router = new Router({
     routes: [
         {
             path: '/',
-            // component: index,
-            component: loadView('index/index'),
+            component: index,
+            // component: loadView('index/index'),
         },
         {
             path: '/login',
