@@ -31,8 +31,8 @@ import {trim,myparse} from './../static/js/common.js'
 Vue.use(Router)
 
 function loadView(view) {
-    return () => import(`@/views/${view}.vue`)
-    // return () => import( `./../views/${view}.vue`)
+    // return () => import(`@/views/${view}.vue`)
+    return () => import( `./../views/${view}.vue`)
 }
 
 var router = new Router({
@@ -147,6 +147,15 @@ var router = new Router({
 
         // { name: 'hello', path: '/hello', component: Hello }
     ]
+})
+
+router.onError((error) => {
+    const pattern = /Loading chunk (\d)+ failed/g;
+    const isChunkLoadFailed = error.message.match(pattern);
+    const targetPath = router.history.pending.fullPath;
+    if(isChunkLoadFailed){
+        router.replace(targetPath);
+    }
 })
 
 export default router
