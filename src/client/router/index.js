@@ -31,9 +31,13 @@ import {trim,myparse} from './../static/js/common.js'
 Vue.use(Router)
 
 function loadView(view) {
-    // return () => import(/* webpackChunkName: "view-[request]" */ `@/views/${view}.vue`)
-    return () => import(/* webpackChunkName: "view-[request]" */ `./../views/${view}.vue`)
-
+    // return () => import(`@/views/${view}.vue`)
+    // return () => import( `./../views/${view}.vue`)
+    var view = view;
+    return function (){
+        return `@/views/${view}.vue`;
+        // return `./../views/${view}.vue`;
+    }
 }
 
 var router = new Router({
