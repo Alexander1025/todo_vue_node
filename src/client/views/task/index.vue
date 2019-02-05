@@ -145,6 +145,9 @@ export default {
     .submit{
         display: block;
         width: 80%;
+        position: fixed;
+        left: 10%;
+        bottom: 60px;
         line-height: 42px;
         background-color: #0084c6;
         color: white;
