@@ -32,12 +32,7 @@ Vue.use(Router)
 
 function loadView(view) {
     // return () => import(`@/views/${view}.vue`)
-    // return () => import( `./../views/${view}.vue`)
-    var view = view;
-    return function (){
-        return `@/views/${view}.vue`;
-        // return `./../views/${view}.vue`;
-    }
+    return () => import( `./../views/${view}.vue`)
 }
 
 var router = new Router({
