@@ -92,6 +92,39 @@ const settheme = function (theme,userid){
 
 
 
+const addtheme = function (option,userid){
+    console.log(option);
+    const promise = new Promise(function(resolve, reject){
+        var connection = mysql.createConnection({
+            host     : config.host,
+            user     : config.user,
+            password : config.password,
+            port: config.port,
+            database: config.database,
+        });
+
+        connection.connect();
+
+        var addSql = 'INSERT INTO themedetails(themeuser,themehead,thememain,themename,status,themetype) VALUES(?,?,?,?,?,?)';
+        var addSqlParams = [userid, option.themehead, option.thememain, option.themename, 1 , 1];
+        //增
+
+        connection.query(addSql,addSqlParams,function (err, result) {
+            if(err){
+                console.log('[INSERT ERROR] - ',err.message);
+                reject(err.message);
+            }
+            resolve(result);
+
+        });
+
+        connection.end();
+    });
+
+    return promise;
+
+}
+
 
 const addtask = function (option){
     console.log(option);
@@ -227,8 +260,10 @@ const changecomplete = function (option){
 exports.getuser = getuser;
 exports.gettheme = gettheme;
 exports.settheme = settheme;
+exports.addtheme = addtheme;
 exports.addtask = addtask;
 exports.gettask = gettask;
 exports.changecomplete = changecomplete;
 exports.deletetask = deletetask;
+
 // export {getuser, gettheme, settheme}

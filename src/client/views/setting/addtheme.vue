@@ -11,11 +11,11 @@
         </theme>
         <div class="link"></div>
         <div class="centerwrap">
-            <input type="text" class="logininput" placeholder="给主题起个名字吧 ^_^">
+            <input v-model="title" type="text" class="logininput" placeholder="给主题起个名字吧 ^_^">
         </div>
         <div class="color">
             <span>头部主题颜色</span>
-            <colorPicker v-model="color" defaultColor="#ff0000"></colorPicker>
+            <colorPicker v-model="colortop" defaultColor="#ff0000"></colorPicker>
         </div>
         <div class="color">
             <span>主题颜色</span>
@@ -23,28 +23,29 @@
         </div>
         <div
             class="submit"
-            @click=""
+            @click="submittheme"
         >
             新增
         </div>
     </div>
 </template>
 <script>
-import colorPicker from './../../components/colorpicker.vue'
+import colorPicker from './../../components/colorpicker.vue';
+import {trim,myparse} from './../../static/js/common.js';
 
 export default {
     data() {
         return{
 
             themeid:1,
-            title: "自定义主题",
+            title: "",
             thisstyle: "background: linear-gradient(-45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);",
             thisheadstyle:"background: #FD7897;",
             present: false,
             imgsrc:"",
 
-            color:'',
-            colormain:'',
+            colortop:'#ff0000',
+            colormain:'#ff0000',
         }
     },
     components:{
@@ -73,11 +74,50 @@ export default {
         },
     },
     methods:{
-        
+        submittheme: function(){
+            if(this.title.trim() == ""){
+                this.title = "自定义主题";
+            }
+            console.log(this.colormain);
+            console.log(this.colortop);
+            console.log(this.title);
+            var that = this;
+            var ajaxargument = "";
+            ajaxargument = `themehead=background:${this.colortop}&thememain=background:${this.colormain}&themename=${this.title}`;
+            var ajax = new XMLHttpRequest();
+            ajax.open('post','/node/addtheme');
+            ajax.send(ajaxargument);
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState==4 &&ajax.status==200) {
+                    var data = ajax.responseText;
+                    data = myparse(data);
+                    // console.log(data);//输入相应的内容
+                    if(data.status == 1){
+                        layer.open({
+                            content: `设置主题信息成功`,
+                            skin: 'msg',
+                            time: 2,
+                        });
+                        var time = setTimeout(()=>{
+                            that.$router.push({path: '/setting/theme'});
+                        },2000);
+                    }else{
+                        layer.open({
+                            content: `设置主题信息超时`,
+                            skin: 'msg',
+                            time: 2,
+                        });
+                    }
+                }
+            }
+        }
     }
 }
 </script>
 <style>
+    .open{
+        z-index: 1;
+    }
     .submit{
         display: block;
         width: 80%;

@@ -184,13 +184,16 @@ export default {
         gradientColorArr.push(this.rgbToHex(parseInt(rStep * i + sColor[0]), parseInt(gStep * i + sColor[1]), parseInt(bStep * i + sColor[2])))
       }
       return gradientColorArr
+    },
+    click: function (){
+        this.openStatus = false
     }
   },
   mounted () {
     // 点击页面上其他地方，关闭弹窗
-    document.onclick = (e) => {
-      this.openStatus = false
-    }
+    var that = this;
+    document.removeEventListener("click",that.click);
+    document.addEventListener("click",that.click);
   }
 }
 </script>

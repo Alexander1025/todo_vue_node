@@ -164,14 +164,14 @@ export default {
                 // },
             ],
             privatethemelist: [
-                {
-                    themeid:1,
-                    title: "默认",
-                    thisstyle: "",
-                    thisheadstyle:"",
-                    present: false,
-                    imgsrc:"",
-                },
+                // {
+                //     themeid:1,
+                //     title: "默认",
+                //     thisstyle: "",
+                //     thisheadstyle:"",
+                //     present: false,
+                //     imgsrc:"",
+                // },
             ]
         }
     },
@@ -242,6 +242,12 @@ export default {
                     this.themelist[i].present = true;
                 }
             }
+            for(let j = 0 ; j <= this.privatethemelist.length-1 ; j++){
+                this.privatethemelist[j].present = false;
+                if(this.privatethemelist[j].themeid == themeid){
+                    this.privatethemelist[j].present = true;
+                }
+            }
         }
     },
     mounted:function (){
@@ -259,9 +265,10 @@ export default {
             if (ajax.readyState==4 &&ajax.status==200) {
                 var data = ajax.responseText;
                 data = myparse(data);
-                // console.log(data);//输入相应的内容
+                console.log(data);//输入相应的内容
                 if(data.status == 1){
                     var thisthemelist = [];
+                    var userthemelist = [];
                     for(let i = 0 ; i <= data.data.length-1 ; i++){
                         // console.log(data.data[i]);
                         if(data.data[i].themeuser == 0){
@@ -292,10 +299,38 @@ export default {
                                 thisObj.present = true;
                             }
                             thisthemelist.push(thisObj);
+                        }else {
+                            // {
+                            //     themeid:1,
+                            //     title: "默认",
+                            //     thisstyle: "background: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);",
+                            //     thisheadstyle:"background: #678bff;",
+                            //     present: false,
+                            //     imgsrc:"",
+                            // },
+
+                            // status: 1
+                            // themehead: "background: #678bff;"
+                            // themeid: 1
+                            // thememain: "background: #617FDF;"
+                            // themename: null
+                            // themetype: 1
+                            // themeuser: 0
+                            var thisObj = {};
+                            thisObj.themeid = data.data[i].themeid;
+                            thisObj.title = data.data[i].themename;
+                            thisObj.thisstyle = data.data[i].thememain;
+                            thisObj.thisheadstyle = data.data[i].themehead;
+                            thisObj.present = false;
+                            thisObj.imgsrc = "";
+                            if(that.$store.state.theme[0] == data.data[i].themeid){
+                                thisObj.present = true;
+                            }
+                            userthemelist.push(thisObj);
                         }
                     }
                     that.themelist = thisthemelist;
-
+                    that.privatethemelist = userthemelist;
                 }else{
                     layer.open({
                         content: `获取主题信息超时`,
@@ -305,8 +340,6 @@ export default {
                 }
             }
         }
-
-
 
     }
 }

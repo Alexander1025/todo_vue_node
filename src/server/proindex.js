@@ -38,6 +38,7 @@ var indexmodel = require("./model/indexmodel.js");
 var getuser = indexmodel.getuser;
 var gettheme = indexmodel.gettheme;
 var settheme = indexmodel.settheme;
+var addtheme = indexmodel.addtheme;
 var addtask = indexmodel.addtask;
 var gettask = indexmodel.gettask;
 var changecomplete = indexmodel.changecomplete;
@@ -482,6 +483,7 @@ app.post('/node/gettheme', function (req, res) {
 
 
 
+
 /**
  *
  用于获取用户主题
@@ -539,6 +541,62 @@ app.post('/node/settheme', function (req, res) {
 });
 
 
+
+/**
+ *
+ 用于新增用户自定义主题
+ *
+ @method addtheme
+ *
+ @param { } 参数名 参数说明
+ *
+ *      {
+
+        }
+*/
+
+app.post('/node/addtheme', function (req, res) {
+
+    // console.log(req);
+    // for(var key in  req.cookies){
+    //     console.log("cookie名:"+key);
+    //     console.log(",cookie值:"+req.cookies[key]+"<br />");
+    // }
+
+    var body = "";
+    req.on('data', function (chunk) {
+        body += chunk;  //一定要使用+=，如果body=chunk，因为请求favicon.ico，body会等于{}
+        console.log("chunk:",chunk);
+    });
+    req.on('end', function () {
+        // 生成返回格式对象
+        let resdata = {};
+        // 解析参数
+        body = querystring.parse(body);  //将一个字符串反序列化为一个对象
+        console.log("body:",body);
+
+        // 业务开始
+        addtheme(body,req.cookies['userid']).then(function (data){
+            console.log(data);
+            if(data.affectedRows == 1){
+                resdata['data'] = data;
+                resdata['status'] = 1;
+                res.send(resdata);
+                res.end();
+            }else{
+                resdata['data'] = data;
+                resdata['status'] = 0;
+                res.send(resdata);
+                res.end();
+            }
+        },function (res){
+            resdata['data'] = res;
+            resdata['status'] = 0;
+            res.send(resdata);
+            res.end();
+        });
+    });
+});
 
 
 
