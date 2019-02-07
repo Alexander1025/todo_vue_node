@@ -3,8 +3,8 @@
         <theme
             :themeid="themeid"
             :title="title"
-            :thisstyle="thisstyle"
-            :thisheadstyle="thisheadstyle"
+            :thisstyle="'background:'+colormain"
+            :thisheadstyle="'background:'+colortop"
             :present="present"
             :imgsrc="imgsrc"
         >
@@ -39,8 +39,8 @@ export default {
 
             themeid:1,
             title: "",
-            thisstyle: "background: linear-gradient(-45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);",
-            thisheadstyle:"background: #FD7897;",
+            // thisstyle: "background: linear-gradient(-45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);",
+            // thisheadstyle:"background: #FD7897;",
             present: false,
             imgsrc:"",
 
