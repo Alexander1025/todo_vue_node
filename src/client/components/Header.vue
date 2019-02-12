@@ -9,7 +9,7 @@
             {{this.$store.state.datemonth}}月
         </span>
         <span>
-            {{this.$store.state.datemonth}}月
+            {{this.$store.state.dateday}}号
         </span>
         <span
             :class="[this.$store.state.islogin ? 'islo' : 'notlogin']"

@@ -56,6 +56,9 @@ export default {
     data () {
         return {
             clientX:0,
+            clientY:0,
+            isvertical:false,
+            isoriginal:true,
             slideleft:0,
             offset:0,
             multiple:40,
@@ -71,42 +74,59 @@ export default {
         touchstart:function (e){
             clearTimeout(this.thistask);
             this.clientX = e.changedTouches[0].clientX;
+            this.clientY = e.changedTouches[0].clientY;
         },
         touchmove:function (e){
-            // console.log(e);
-            var translationleft = e.changedTouches[0].clientX - this.clientX + this.offset;
-            if(translationleft < 0 && translationleft >= -this.taskwidth){
-                this.slideleft = translationleft;
-                this.taskstatus = 0;
-            }else if(translationleft < -this.taskwidth){
-                var translationleft1 = e.changedTouches[0].clientX + this.taskwidth - this.clientX + this.offset;
-                this.slideleft = -this.taskwidth + (Math.atan(translationleft1/this.multiple))*this.multiple;
-                this.taskstatus = 1;
-            }else if(translationleft > 0){
-                // this.slideleft = (translationleft)/((translationleft)/80+0.8);
-                // this.slideleft = (translationleft)/(((translationleft*translationleft)/10000)+1);
-                this .slideleft = (Math.atan(translationleft/this.multiple))*this.multiple;
-                this.taskstatus = 0;
+            if(Math.abs(e.changedTouches[0].clientY - this.clientY) > 20){
+                this.isvertical = true;
+                if(this.isoriginal){
+                    console.log("qweqweqwe");
+                    this.isoriginal = false;
+                    this.resilience(this.slideleft, 0);
+                }
+
             }
-            // console.log("touchmove");
-        },
-        touchend:function (e){
-            // console.log(e);
-            // console.log("touchend");
-            if(this.taskstatus == 0){
-                this.resilience(this.slideleft, 0);
-                this.offset = 0;
-            }else if(this.taskstatus == 1){
-                this.resilience(this.slideleft, -this.taskwidth);
-                this.offset = -this.taskwidth;
+            if(!this.isvertical){
+                // console.log(e);
+                var translationleft = e.changedTouches[0].clientX - this.clientX + this.offset;
+                if(translationleft < 0 && translationleft >= -this.taskwidth){
+                    this.slideleft = translationleft;
+                    this.taskstatus = 0;
+                }else if(translationleft < -this.taskwidth){
+                    var translationleft1 = e.changedTouches[0].clientX + this.taskwidth - this.clientX + this.offset;
+                    this.slideleft = -this.taskwidth + (Math.atan(translationleft1/this.multiple))*this.multiple;
+                    this.taskstatus = 1;
+                }else if(translationleft > 0){
+                    // this.slideleft = (translationleft)/((translationleft)/80+0.8);
+                    // this.slideleft = (translationleft)/(((translationleft*translationleft)/10000)+1);
+                    this .slideleft = (Math.atan(translationleft/this.multiple))*this.multiple;
+                    this.taskstatus = 0;
+                }
+                // console.log("touchmove");
             }
 
-            this.thistask = setTimeout(() => {
-                this.resilience(this.slideleft, 0);
-                this.taskstatus = 0;
-                this.offset = 0;
-            },2000);
-            // clearInterval(this.thistask);
+        },
+        touchend:function (e){
+            this.isoriginal = true;
+            if(!this.isvertical){
+                // console.log(e);
+                // console.log("touchend");
+                if(this.taskstatus == 0){
+                    this.resilience(this.slideleft, 0);
+                    this.offset = 0;
+                }else if(this.taskstatus == 1){
+                    this.resilience(this.slideleft, -this.taskwidth);
+                    this.offset = -this.taskwidth;
+                }
+
+                this.thistask = setTimeout(() => {
+                    this.resilience(this.slideleft, 0);
+                    this.taskstatus = 0;
+                    this.offset = 0;
+                },2000);
+                // clearInterval(this.thistask);
+            }
+            this.isvertical = false;
         },
         taskclick:function (){
             if(this.taskstatus != 0){

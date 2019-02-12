@@ -1,5 +1,6 @@
 <template>
-    <div class="task" ref="task" :style="{ top: tasktop + 'px', height: taskheight + 'px'}">
+    <!-- <div class="task" ref="task" :style="{ top: tasktop + 'px', height: taskheight + 'px'}"> -->
+    <div class="task" ref="task">
         <div class="tasktop">
             {{this.tasktoptext}}
         </div>
@@ -44,19 +45,19 @@ export default {
         tasklist,
     },
     mounted:function (){
-        this.$nextTick(function () {
-            for(let i = 0 , j = this.$parent.$children ; i <= j.length-1 ; i++){
-                if(this.$parent.$children[i].$el.className == "header_common" || this.$parent.$children[i].$el.className == "calendar"){
-                    this.tasktop += this.$parent.$children[i].$el.offsetHeight;
-                }
-            }
-            for(let i = 0 , j = this.$parent.$children ; i <= j.length-1 ; i++){
-                if(this.$parent.$children[i].$el.className == "footer_common"){
-                    this.taskheight = (document.body.clientHeight || document.documentElement.clientHeight) - this.$parent.$children[i].$el.clientHeight - this.tasktop;
-                }
-            }
-            this.$refs.task.style.display = "block";
-        })
+        // this.$nextTick(function () {
+        //     for(let i = 0 , j = this.$parent.$children ; i <= j.length-1 ; i++){
+        //         if(this.$parent.$children[i].$el.className == "header_common" || this.$parent.$children[i].$el.className == "calendar"){
+        //             this.tasktop += this.$parent.$children[i].$el.offsetHeight;
+        //         }
+        //     }
+        //     for(let i = 0 , j = this.$parent.$children ; i <= j.length-1 ; i++){
+        //         if(this.$parent.$children[i].$el.className == "footer_common"){
+        //             this.taskheight = (document.body.clientHeight || document.documentElement.clientHeight) - this.$parent.$children[i].$el.clientHeight - this.tasktop;
+        //         }
+        //     }
+        //     this.$refs.task.style.display = "block";
+        // })
 
     }
 }
@@ -72,11 +73,12 @@ export default {
     }
     .task{
         overflow: scroll;
-        display: none;
+        /* display: none; */
         position: fixed;
-        top:0;
+        top:50px;
         left: 0;
         width: 100%;
+        height: calc(100vh - 100px);
     }
     .tasklistwrap{
         overflow: hidden;

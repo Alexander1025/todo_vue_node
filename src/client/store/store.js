@@ -7,6 +7,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         datemonth: "",
+        dateday:"",
         username: "hi",
         userid:0,
         islogin:false,
@@ -44,6 +45,7 @@ const store = new Vuex.Store({
         getMonth:function (store,mon){
             let monarr = ['一','二','三','四','五','六','七','八','九','十','十一','十二',];
             store.datemonth = monarr[mon];
+            store.dateday = new Date().getDate();
         },
         setState:function (store,option){
             store[option.attr] = option.field;

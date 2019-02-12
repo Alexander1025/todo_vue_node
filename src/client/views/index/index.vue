@@ -1,7 +1,7 @@
 <template>
     <div class="indexwrap">
         <headerCommon></headerCommon>
-        <calendar></calendar>
+        <!-- <calendar></calendar> -->
         <taskcomponent></taskcomponent>
 
         <footerCommon></footerCommon>
