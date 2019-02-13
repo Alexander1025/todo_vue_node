@@ -80,7 +80,6 @@ export default {
             if(Math.abs(e.changedTouches[0].clientY - this.clientY) > 20){
                 this.isvertical = true;
                 if(this.isoriginal){
-                    console.log("qweqweqwe");
                     this.isoriginal = false;
                     this.resilience(this.slideleft, 0);
                 }
