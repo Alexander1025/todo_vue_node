@@ -58,6 +58,7 @@ export default {
             clientX:0,
             clientY:0,
             isvertical:false,
+            iscrosswise:false,
             isoriginal:true,
             slideleft:0,
             offset:0,
@@ -77,13 +78,25 @@ export default {
             this.clientY = e.changedTouches[0].clientY;
         },
         touchmove:function (e){
-            if(Math.abs(e.changedTouches[0].clientY - this.clientY) > 20){
-                this.isvertical = true;
-                if(this.isoriginal){
-                    this.isoriginal = false;
-                    this.resilience(this.slideleft, 0);
+            if(!this.isvertical){
+                // 判断是否有横向移动
+                var crosswisemove = 40;
+                if(Math.abs(e.changedTouches[0].clientX - this.clientX) > crosswisemove){
+                    this.iscrosswise = true;
                 }
+            }
+            if(!this.iscrosswise){
+                // 判断是否有竖向移动
+                // 有竖向移动的时候就将横向移动关闭
+                var verticalmove = 20;
+                if(Math.abs(e.changedTouches[0].clientY - this.clientY) > verticalmove){
+                    this.isvertical = true;
+                    if(this.isoriginal){
+                        this.isoriginal = false;
+                        this.resilience(this.slideleft, 0);
+                    }
 
+                }
             }
             if(!this.isvertical){
                 // console.log(e);
