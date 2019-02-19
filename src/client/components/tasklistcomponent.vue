@@ -119,6 +119,8 @@ export default {
 
         },
         touchend:function (e){
+            this.isvertical = false;
+            this.iscrosswise = false;
             this.isoriginal = true;
             if(!this.isvertical){
                 // console.log(e);
