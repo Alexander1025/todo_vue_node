@@ -201,10 +201,19 @@ const deletetask = function (taskid){
         });
         connection.connect();
 
-        var delSql = `DELETE FROM task where taskid=${taskid}`;
-        //删
-        connection.query(delSql,function (err, result) {
+        // var delSql = `DELETE FROM task where taskid=${taskid}`;
+        // //删
+        // connection.query(delSql,function (err, result) {
+        //     if(err){
+        //         reject(err.message);
+        //     }
+        //     resolve(result);
+        // });
+        var modSql = `UPDATE task SET status = 0 WHERE taskid = ${taskid}`;
+
+        connection.query(modSql,modSqlParams,function (err, result) {
             if(err){
+                console.log('[SELECT ERROR] - ',err.message);
                 reject(err.message);
             }
             resolve(result);
