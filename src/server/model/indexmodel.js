@@ -211,7 +211,7 @@ const deletetask = function (taskid){
         // });
         var modSql = `UPDATE task SET status = 0 WHERE taskid = ${taskid}`;
 
-        connection.query(modSql,modSqlParams,function (err, result) {
+        connection.query(modSql,function (err, result) {
             if(err){
                 console.log('[SELECT ERROR] - ',err.message);
                 reject(err.message);
