@@ -15,7 +15,7 @@
             </tasklist>
         </div>
         <div class="tasktop">
-            已完成
+            {{this.tasktoptext1}}
         </div>
         <div class="tasklistwrap">
             <tasklist
@@ -39,6 +39,7 @@ export default {
             tasktop:0,
             taskheight:0,
             tasktoptext: "未完成",
+            tasktoptext1:"已完成"
         }
     },
     components:{
